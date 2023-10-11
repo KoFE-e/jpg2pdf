@@ -96,12 +96,51 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_hamburger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/hamburger */ "./src/js/modules/hamburger.js");
+/* harmony import */ var _modules_drag__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/drag */ "./src/js/modules/drag.js");
+
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   Object(_modules_hamburger__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  Object(_modules_drag__WEBPACK_IMPORTED_MODULE_1__["default"])();
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/drag.js":
+/*!********************************!*\
+  !*** ./src/js/modules/drag.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const drag = () => {
+  const fileInput = document.querySelector('[name="files"]'),
+    overlay = document.querySelector('.file__drag');
+  ['dragenter', 'dragleave', 'dragover', 'drop'].forEach(eventName => {
+    fileInput.addEventListener(eventName, preventDefaults, false);
+  });
+  function preventDefaults(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  function highlight() {
+    overlay.classList.add('file__drag_active');
+  }
+  function unhighlight() {
+    overlay.classList.remove('file__drag_active');
+  }
+  ['dragenter', 'dragover'].forEach(eventName => {
+    fileInput.addEventListener(eventName, highlight, false);
+  });
+  ['dragleave', 'drop'].forEach(eventName => {
+    fileInput.addEventListener(eventName, unhighlight, false);
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (drag);
 
 /***/ }),
 

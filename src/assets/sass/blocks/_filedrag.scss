@@ -1,0 +1,30 @@
+.file__drag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    opacity: 0;
+    z-index: -1;
+    font-size: 57px;
+    line-height: 1.2;
+    font-weight: 400;
+    color: #eeeeee;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: 0.6s all;
+    span {
+        font-size: 335px;
+        line-height: 240px;
+        font-weight: 800;
+    }
+    &_active {
+        visibility: visible;
+        opacity: 1;
+    }
+}

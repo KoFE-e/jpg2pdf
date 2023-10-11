@@ -55,7 +55,7 @@
                 Конвертируйте ваши документы PDF в изображения JPG<br>онлайн и бесплатно
             </div>
             <label class="main__btnupload" type="file" id="files" name="files" accept="image/jpeg">
-                <input type="file" id="files" name="files" accept="image/jpeg">
+                <input type="file" id="files" name="files" accept="image/jpeg image/png" multiple>
                 Выбрать файлы PDF
             </label>
             <div class="main__dragtext">
@@ -68,7 +68,12 @@
                 </div>
             </div>
         </div>
-        <div class="overlay"></div>
+        <div class="file__drag">
+            <div class="file__drag-text">
+                Просто отпустите<br>
+                <span>+</span>
+            </div>
+        </div>
     </section>
     <footer class="footer">
         <div class="footer__text">
