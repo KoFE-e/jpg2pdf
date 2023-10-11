@@ -1,0 +1,13 @@
+.footer {
+    min-height: 70px;
+    opacity: 0.6;
+    background-color: #e0e0e0;
+    box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.15);
+    padding: 22px 33px;
+    &__text {
+        font-size: 28px;
+        line-height: 1.2;
+        font-weight: 400;
+        color: #292929;
+    }
+}
