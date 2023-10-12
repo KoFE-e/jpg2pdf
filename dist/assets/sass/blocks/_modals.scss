@@ -1,0 +1,185 @@
+.modal {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    position: fixed;
+    overflow: hidden;
+    opacity: 0;
+    background-color: rgba(0,0,0,0.2);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+    transition: 0.3s all;
+    &__content {
+        position: fixed;
+        min-width: 90%;
+        min-height: 95%;
+        box-shadow: 0px 0px 71px 19px rgba(0,0,0,0.41);
+        border-radius: 35px;
+        top: 2.5%;
+        left: 5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #f6f6f6;
+    }
+    &_active {
+        visibility: visible;
+        opacity: 1;
+    }
+    .header__logo {
+        cursor: default;
+    }
+    &__header {
+        margin-top: 80px;
+        font-size: 60px;
+        font-weight: 800;
+        color: #292929;
+    }
+    &__form {
+        margin-top: 45px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        &__password-difficult {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            &-indicator {
+                width: 658px;
+                height: 12px;
+                background-color: #efefef;
+                border-radius: 6px;
+                margin-bottom: 12px;
+                span {
+                    display: block;
+                    border-radius: 6px 0 0 6px;
+                    width: 50%;
+                    height: 12px;
+                    background-color: #d4cd0c;
+                }
+            }
+            &-text {
+                font-size: 25px;
+                font-weight: 400;
+            }
+        }
+        &__btn {
+            width: 698px;
+            height: 82px;
+            border-radius: 35px;
+            border: none;
+            margin-top: 32px;
+            background-color: #00aa4e;
+            cursor: pointer;
+            transition: 0.6s all;
+            font-size: 42px;
+            color: #fff;
+            font-weight: 400;
+            margin-bottom: 15px;
+            &:hover {
+                transform: scale(1.01);
+                box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            }
+        }
+        &__text {
+            font-size: 27px;
+            font-weight: 400;
+            color: #292929;
+            text-align: center;
+            margin-top: 12px;
+            &-help {
+                font-size: 36px;
+            }
+        }
+        &__link {
+            text-decoration: underline;
+            color: #00aa4e;
+            cursor: pointer;
+        }
+        &__input {
+            padding: 30px 30px 30px 104px;
+            width: 698px;
+            font-size: 35px;
+            font-weight: 400;
+            color: #989898;
+            height: 94px;
+            background-color: #efefef;
+            border-radius: 35px;
+            border: none;
+            transition: 0.6s all;
+            outline: none;
+            &__wrapper {
+                position: relative;
+                margin-bottom: 20px;
+                &_mail {
+                    img {
+                        position: absolute;
+                        width: 40px;
+                        height: 30px;
+                        top: 32px;
+                        left: 35px;
+                    }
+                }
+                &_login {
+                    img {
+                        position: absolute;
+                        width: 40px;
+                        height: 45px;
+                        top: 25px;
+                        left: 35px;
+                    }
+                }
+                &_password, &_confirm {
+                    img {
+                        position: absolute;
+                        width: 31px;
+                        height: 40px;
+                        top: 27px;
+                        left: 40px;
+                    }
+                }
+            }
+            &:active, &:focus {
+                outline: 1px solid black;
+            }
+        }
+    }
+    &_register {
+        .modal__header {
+            margin-top: 20px;
+        }
+        .modal__form {
+            margin-top: 20px;
+            &__input {
+                &__wrapper {
+                    &:nth-child(3) {
+                        margin-bottom: 12px;
+                    }
+                }
+            }
+            &__btn {
+                margin: 0;
+            }
+        }
+    }
+    &_help {
+        .modal__header {
+            margin-top: 116px;
+            font-size: 80px;
+            font-weight: 400;
+            color: #292929;
+            margin-bottom: 250px;
+        }
+        .modal__content {
+            display: block;
+            text-align: center;
+        }
+    }
+}

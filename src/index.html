@@ -8,6 +8,7 @@
 </head>
 <body>
     <header class="header">
+        <!-- _login к header -->
         <div class="container">
             <div class="header__wrapper">
                 <div class="header__logo">
@@ -16,11 +17,24 @@
                         Конвертер
                     </div>
                 </div>
+                <!-- _login к header__menu -->
                 <div class="header__menu">
-                    <div class="header__menu-text">
-                        Мои файлы
+                    <div class="header__menu__files">
+                        <div class="header__menu__files-text">
+                            Мои файлы
+                        </div>
+                        <!-- <div class="header__menu__files-counter">7</div> -->
                     </div>
-                    <button class="header__menu-loginbtn">
+                    <!-- <div class="header__menu__profile">
+                        <div class="header__menu__profile-text">
+                            Петровых Евгений
+                        </div>
+                        <div class="header__menu__profile-logo">
+                            <img src="assets/icons/profile.png" alt="profile" class="header__menu__profile-img">
+                        </div>
+                    </div> -->
+                    
+                    <button class="header__menu-loginbtn" data-trigger="login">
                         Вход
                     </button>
                     <div class="hamburger">
@@ -42,7 +56,7 @@
             </div>
             <div class="menu__item">
                 <img src="assets/icons/answer.png" alt="help" class="menu__item-img">
-                <div class="menu__item-text">Помощь</div>
+                <div class="menu__item-text" data-trigger="help">Помощь</div>
             </div>
         </div>
     </header>
@@ -80,6 +94,94 @@
             @AkbarsConverter 2023 - Конвертер PDF
         </div>
     </footer>
+
+    <div class="modal modal_login" data-modal>
+        <div class="modal__content">
+            <div class="modal__logo header__logo">
+                <img src="assets/icons/akbars_bank_logo.png" alt="logo" class="header__logo__img">
+                <div class="header__logo__text">
+                    Конвертер
+                </div>
+            </div>
+            <div class="modal__header">
+                Добро пожаловать
+            </div>
+            <form action="" class="modal__form" name="login">
+                <div class="modal__form__input__wrapper modal__form__input__wrapper_mail">
+                    <img src="assets/icons/mail.png" alt="mail" class="modal__form__input__icon">
+                    <input type="mail" name="mail" class="modal__form__input modal__form__input_mail" placeholder="Введите электронную почту">
+                </div>
+                <div class="modal__form__input__wrapper modal__form__input__wrapper_password">
+                    <img src="assets/icons/lock.png" alt="mail" class="modal__form__input__icon">
+                    <input type="password" name="password" class="modal__form__input modal__form__input_password" placeholder="Введите пароль">
+                </div>
+                <div class="modal__form__text">
+                    Забыли пароль? <span class="modal__form__link">Восстановить</span>
+                </div>
+                <button class="modal__form__btn">
+                    Войти
+                </button>
+            </form>
+            <div class="modal__form__text">
+                Нет учетной записи? <span class="modal__form__link" data-trigger="register">Создать учетную запись</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal_register" data-modal>
+        <div class="modal__content">
+            <div class="modal__logo header__logo">
+                <img src="assets/icons/akbars_bank_logo.png" alt="logo" class="header__logo__img">
+                <div class="header__logo__text">
+                    Конвертер
+                </div>
+            </div>
+            <div class="modal__header">
+                Регистрация
+            </div>
+            <form action="" class="modal__form" name="register">
+                <div class="modal__form__input__wrapper modal__form__input__wrapper_login">
+                    <img src="assets/icons/profile.png" alt="profile" class="modal__form__input__icon">
+                    <input type="text" name="login" class="modal__form__input modal__form__input_login" placeholder="Введите имя аккаунта">
+                </div>
+                <div class="modal__form__input__wrapper modal__form__input__wrapper_mail">
+                    <img src="assets/icons/mail.png" alt="mail" class="modal__form__input__icon">
+                    <input type="mail" name="mail" class="modal__form__input modal__form__input_mail" placeholder="Введите электронную почту">
+                </div>
+                <div class="modal__form__input__wrapper modal__form__input__wrapper_password">
+                    <img src="assets/icons/lock.png" alt="password" class="modal__form__input__icon">
+                    <input type="password" name="password" class="modal__form__input modal__form__input_password" placeholder="Введите пароль">
+                </div>
+                <div class="modal__form__password-difficult">
+                    <div class="modal__form__password-difficult-indicator">
+                        <span></span>
+                    </div>
+                    <div class="modal__form__password-difficult-text">
+                        Ты можешь еще лучше!
+                    </div>
+                </div>
+                <div class="modal__form__input__wrapper modal__form__input__wrapper_confirm">
+                    <img src="assets/icons/lock.png" alt="confirm" class="modal__form__input__icon">
+                    <input type="password" name="confirm" class="modal__form__input modal__form__input_confirm" placeholder="Подтвердите пароль">
+                </div>
+                <button class="modal__form__btn">
+                    Зарегистироваться
+                </button>
+            </form>
+            <div class="modal__form__text">
+                Есть учетная запись? <span class="modal__form__link" data-trigger="login">Войти</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal_help" data-modal>
+        <div class="modal__content">
+            <div class="modal__header">
+                Решение возможных проблем
+            </div>
+            <div class="modal__form__text modal__form__text-help">
+                Скоро будет
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

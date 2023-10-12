@@ -43,9 +43,12 @@
             font-size: 34px;
             font-weight: 400;
             color: #292929;
+            transition: 0.3s all;
         }
         &:hover {
-            transform: scale(1.05);
+            .menu__item-text {
+                color: #00aa4e;
+            }
         }
     }
 }

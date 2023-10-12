@@ -25,20 +25,10 @@
         }
     }
     &__menu {
-        width: 530px;
+        min-width: 530px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        &-text {
-            font-size: 40px;
-            font-weight: 400;
-            color: #2b2b2b;
-            cursor: pointer;
-            transition: 0.6s all;
-            &:hover {
-                transform: scale(1.05);
-            }
-        }
         &-loginbtn {
             width: 169px;
             height: 76px;
@@ -56,5 +46,65 @@
                 box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
             }
         }
+        &__profile {
+            display: flex;
+            align-items: center;
+            margin-right: 30px;
+            &-text {
+                font-size: 40px;
+                line-height: 1.2;
+                margin-right: 18px;
+                font-weight: 400;
+            }
+            &-logo {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 94px;
+                height: 94px;
+                background-color: #ececec;
+                border-radius: 100%;
+                img {
+                    display: block;
+                    width: 52px;
+                    height: 57px;
+                }
+            }
+        }
+        &__files {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            &-text {
+                font-size: 40px;
+                font-weight: 400;
+                color: #2b2b2b;
+                margin-right: 20px;
+            }
+            &-counter {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 61px;
+                height: 61px;
+                background-color: #00aa4e;
+                border-radius: 100%;
+                font-size: 40px;
+                line-height: 1.2;
+                font-weight: 400;
+                color: #fff;
+                margin-right: 28px;
+            }
+            transition: 0.6s all;
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+        &_login {
+            min-width: 820px;
+        }
+    }
+    &_login {
+        padding: 23px 32px;
     }
 }
