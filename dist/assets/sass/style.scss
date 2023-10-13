@@ -1,5 +1,13 @@
 @import 'base/fonts';
 
+* {
+    font-family: 'Gilroy';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: 0.3s all;
+}
+
 @import 'blocks/header';
 @import 'blocks/hamburger';
 @import 'blocks/main';
@@ -7,16 +15,14 @@
 @import 'blocks/menu';
 @import 'blocks/filedrag';
 @import 'blocks/modals';
-
-* {
-    font-family: 'Gilroy';
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import 'blocks/darktheme';
 
 .container {
     position: relative;
     max-width: 100%;
     margin: 0 auto;
+}
+
+body {
+    transition: 0 margin-right;
 }

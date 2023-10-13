@@ -1,0 +1,70 @@
+body.dark {
+    .header {
+        background-color: #282828;
+        box-shadow: 0px 0px 90px 0px rgba(255,255,255,0.09);
+        z-index: 1;
+        &__logo {
+            &__text {
+                color: #fff;
+            }
+        }
+        &__menu {
+            &__files {
+                &-text {
+                    color: #fff;
+                }
+            }
+        }
+        .hamburger {
+            span {
+                background-color: #ebf2f2;;
+            }
+        }
+        .menu {
+            background-color: #282828;
+            box-shadow: 0px 0px 59px 0px rgba(255,255,255,0.12);
+            &__item {
+                &-text {
+                    color: #fff;
+                }
+                &:hover {
+                    .menu__item-text {
+                        color: #00aa4e;
+                    }
+                }
+                svg g {
+                    fill: #fff;
+                }
+            }
+        }
+    }
+
+    .main {
+        background-color: #252525;
+        &__header, &__subheader, &__btnupload, &__dragtext, &__icon-text {
+            color: #fff;
+        }
+    }
+    .footer {
+        background-color: #1c1c1c;
+        box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.15);
+        &__text {
+            color: #909898;
+        }
+    }
+    .modal {
+        &__content {
+            background-color: #1e1e1e;
+            box-shadow: 0px 0px 71px 19px rgba(0,0,0,0.41);
+        }
+        &__logo__text, &__header, &__form__text, &__form__password-difficult-text {
+            color: #fff;
+        }
+        &__form__input {
+            background-color: #282828;
+            &:active, &:focus {
+                outline: 1px solid #fff;
+            }
+        }
+    }
+}

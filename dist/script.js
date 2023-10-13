@@ -98,6 +98,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_hamburger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/hamburger */ "./src/js/modules/hamburger.js");
 /* harmony import */ var _modules_drag__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/drag */ "./src/js/modules/drag.js");
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
+/* harmony import */ var _modules_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/theme */ "./src/js/modules/theme.js");
+
 
 
 
@@ -107,6 +109,7 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_hamburger__WEBPACK_IMPORTED_MODULE_0__["default"])();
   Object(_modules_drag__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  Object(_modules_theme__WEBPACK_IMPORTED_MODULE_3__["default"])();
 });
 
 /***/ }),
@@ -188,14 +191,10 @@ const modal = () => {
       windows.forEach(item => {
         item.classList.remove('modal_active');
       });
-      document.body.style.marginRight = `0px`;
-      document.body.style.overflow = "";
     }
     function openModal() {
       closeAllModals();
       modal.classList.add('modal_active');
-      document.body.style.overflow = "hidden";
-      document.body.style.marginRight = `${scroll}px`;
     }
     trigger.forEach(item => {
       item.addEventListener('click', e => {
@@ -227,6 +226,55 @@ const modal = () => {
   bindModal('[data-trigger="help"]', '.modal_help');
 };
 /* harmony default export */ __webpack_exports__["default"] = (modal);
+
+/***/ }),
+
+/***/ "./src/js/modules/theme.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/theme.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const theme = () => {
+  const trigger = document.querySelector('[data-theme]'),
+    triggerText = trigger.querySelector('span'),
+    body = document.body;
+  let curTheme = trigger.getAttribute('data-theme');
+  function isSystemDark() {
+    const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+    return darkThemeMq.matches;
+  }
+  function switchSystemTheme() {
+    if (isSystemDark()) {
+      body.classList.add('dark');
+    } else {
+      body.classList.remove('dark');
+    }
+  }
+  switchSystemTheme();
+  trigger.addEventListener('click', () => {
+    if (curTheme === 'system') {
+      curTheme = 'light';
+      triggerText.innerHTML = 'Светлая';
+      body.classList.remove('dark');
+      trigger.setAttribute('data-theme', 'light');
+    } else if (curTheme === 'light') {
+      curTheme = 'dark';
+      triggerText.innerHTML = 'Темная';
+      body.classList.add('dark');
+      trigger.setAttribute('data-theme', 'dark');
+    } else if (curTheme === 'dark') {
+      curTheme = 'system';
+      triggerText.innerHTML = 'Система';
+      switchSystemTheme();
+      trigger.setAttribute('data-theme', 'system');
+    }
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (theme);
 
 /***/ })
 

@@ -65,18 +65,26 @@
         align-items: center;
         justify-content: space-between;
         max-width: 300px;
+        text-decoration: none;
+        &:hover {
+            .main__icon-img {
+                transform: scale(1.1);
+            }
+            .main__icon-text {
+                color: #00aa4e;
+            }
+        }
         &-img {
             width: 60px;
             height: 60px;
+            transition: 0.3s all;
         }
         &-text {
             font-size: 46.5px;
             line-height: 1.2;
             font-weight: 400;
             color: #292929;
+            transition: 0.3s all;
         }
-    }
-    .overlay {
-
     }
 }

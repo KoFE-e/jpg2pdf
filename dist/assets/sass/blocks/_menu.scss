@@ -34,7 +34,7 @@
             height: 40px;
         }
         &:last-child {
-            img {
+            .menu__item-img {
                 width: 47px;
                 height: 40px;
             }
@@ -44,6 +44,9 @@
             font-weight: 400;
             color: #292929;
             transition: 0.3s all;
+            span {
+                transition: none;
+            }
         }
         &:hover {
             .menu__item-text {

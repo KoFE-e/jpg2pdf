@@ -11,16 +11,12 @@ const modal = () => {
             windows.forEach(item => {
                 item.classList.remove('modal_active');
             });
-            document.body.style.marginRight = `0px`;
-            document.body.style.overflow = "";
         }
 
         function openModal() {
             closeAllModals();
 
             modal.classList.add('modal_active');
-            document.body.style.overflow = "hidden";
-            document.body.style.marginRight = `${scroll}px`;
         }
 
         trigger.forEach(item => {
