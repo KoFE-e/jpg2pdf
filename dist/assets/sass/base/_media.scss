@@ -641,3 +641,80 @@
         }
     }
 }
+
+@media (max-width: 575.98px) {
+    .header {
+        height: 80px;
+        padding: 10px;
+        &__logo {
+            flex-direction: column;
+            &__img {
+                margin-right: 0;
+            }
+        }
+        &__menu {
+            &-loginbtn {
+                width: 55px;
+                height: 30px;
+                border-radius: 6px;
+                font-size: 16px;
+                margin-right: 10px;
+            }
+            &__profile {
+                margin-right: 0;
+                &-logo {
+                    display: none;
+                }
+                &-text {
+                    margin-right: 10px;
+                    text-align: right;
+                }
+            }
+        }
+    }
+    .menu {
+        padding: 10px 15px;
+        top: 90px;
+        right: 10px;
+        width: 200px;
+        &__item {
+            &-text {
+                font-size: 16px;
+            }
+        }
+    }
+    .main {
+        padding: 30px 10px;
+        &__header {
+            font-size: 25px;
+        }
+        &__subheader {
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        &__btnupload {
+            width: 300px;
+        }
+    }
+    .modal {
+        &__content {
+            padding: 0 5px;
+            left: 0%;
+            top: 50%;
+            transform: translateY(-50%);
+            min-width: 100%;
+            min-height: 70%;
+        }
+        &__header {
+            font-size: 25px;
+        }
+        &__form {
+            &__input, &__btn {
+                width: 300px;
+            }
+            &__password-difficult-indicator {
+                width: 300px;
+            }
+        }
+    }
+}
