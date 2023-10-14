@@ -1,6 +1,6 @@
 .main {
     background-color: rgba(240,240,240,0.63);
-    min-height: 870px;
+    min-height: 100vh;
     text-align: center;
     padding: 130px 0 121px 0;
     position: relative;
@@ -11,6 +11,8 @@
         color: #292929;
     }
     &__subheader {
+        margin: 0 auto;
+        max-width: 1070px;
         margin-top: 55px;
         font-size: 40px;
         line-height: 1.2;
@@ -52,6 +54,8 @@
         }
     }
     &__dragtext {
+        max-width: 630px;
+        margin: 0 auto;
         margin-top: 25px;
         font-size: 29px;
         line-height: 1.2;

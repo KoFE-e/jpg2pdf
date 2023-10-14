@@ -1,3 +1,643 @@
-@media (max-width: 1399.98px) {
-    
+@media (max-width: 1699.98px) {
+    .header {
+        &__menu {
+            min-width: 500px;
+            justify-content: end;
+            &__files {
+                display: none;
+            }
+        }
+    }
+    .menu {
+        &__item {
+            &_files {
+                display: grid;
+            }
+        }
+    }
+}
+@media (max-width: 1439.98px) {
+    .header {
+        padding: 20px 30px;
+        height: 110px;
+        &_login {
+            .header__menu {
+                min-width: auto;
+            }
+        }
+        &__logo {
+            &__img {
+                width: 150px;
+                height: 52px;
+                margin-right: 15px;
+            }
+            &__text {
+                font-size: 50px;
+            }
+        }
+        &__menu {
+            &-loginbtn {
+                width: 140px;
+                margin-right: 30px;
+                height: 70px;
+                font-size: 35px;
+            }
+            &__profile {
+                margin-right: 25px;
+                &-logo {
+                    width: 70px;
+                    height: 70px;
+                    img {
+                        width: 41px;
+                        height: 46px;
+                    }
+                }
+                &-text {
+                    font-size: 30px;
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
+    .menu {
+        top: 130px;
+        width: 335px;
+        &__item {
+            column-gap: 15px;
+            &-text {
+                font-size: 30px;
+            }
+            &_files .header__menu__files-counter {
+                font-size: 30px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+    }
+    .main {
+        padding: 80px 30px;
+        &__header {
+            font-size: 60px;
+            line-height: 1;
+        }
+        &__subheader {
+            font-size: 30px;
+            max-width: 900px;
+            margin-top: 45px;
+        }
+        &__btnupload {
+            margin-top: 40px;
+            font-size: 40px;
+            width: 660px;
+            height: 140px;
+        }
+        &__dragtext {
+            font-size: 20px;
+            margin-top: 20px;
+            max-width: 450px;
+        }
+        &__icon {
+            margin-top: 30px;
+            max-width: 270px;
+            &-img {
+                width: 50px;
+                height: 50px;
+            }
+            &-text {
+                font-size: 40px;
+            }
+        }
+    }
+    .footer {
+        padding: 22px 33px;
+        &__text {
+            font-size: 22px;
+        }
+    }
+    .hamburger {
+        height: 40px;
+        span {
+            width: 58px;
+        }
+        &.expanded span:first-child {
+            transform: translateY(17px) rotate(45deg);
+        }
+        &.expanded span:last-child {
+            transform: translateY(-17px) rotate(-45deg);
+        }
+    }
+    .modal {
+        &__header {
+            margin-top: 20px;
+            font-size: 45px;
+        }
+        &__form {
+            margin-top: 30px;
+            &__input {
+                padding: 0px 20px 0px 75px;
+                width: 550px;
+                font-size: 25px;
+                height: 70px;
+                border-radius: 25px;
+                &__wrapper {
+                    margin-bottom: 15px;
+                    &_mail img {
+                        width: 35px;
+                        height: 25px;
+                        top: 22px;
+                        left: 26px;
+                    }
+                    &_password img, &_confirm img {
+                        width: 25px;
+                        height: 31px;
+                        top: 18px;
+                        left: 32px;
+                    }
+                    &_login img {
+                        width: 30px;
+                        height: 35px;
+                        top: 16px;
+                        left: 29px;
+                    }
+                }
+            }
+            &__text {
+                font-size: 20px;
+            }
+            &__btn {
+                width: 550px;
+                font-size: 30px;
+                height: 70px;
+                border-radius: 25px;
+                margin-top: 20px;
+            }
+            &__password-difficult {
+                &-indicator {
+                    width: 550px;
+                    height: 10px;
+                    margin-bottom: 8px;
+                }
+                &-text {
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .header {
+        padding: 15px 30px;
+        height: 90px;
+        &__logo {
+            &__img {
+                width: 105px;
+                height: 37px;
+                margin-right: 10px;
+            }
+            &__text {
+                font-size: 40px;
+            }
+        }
+        &__menu {
+            &-loginbtn {
+                width: 110px;
+                margin-right: 20px;
+                height: 50px;
+                border-radius: 14px;
+                font-size: 25px;
+            }
+            &__profile {
+                margin-right: 15px;
+                &-text {
+                    font-size: 25px;
+                }
+                &-logo {
+                    width: 50px;
+                    height: 50px;
+                    img {
+                        width: 30px;
+                        height: 36px;
+                    }
+                }
+            }
+        }
+    }
+    .menu {
+        top: 110px;
+        right: 25px;
+        width: 300px;
+        padding: 20px 25px;
+        grid-template-rows: repeat(3,minmax(45px,auto));
+        grid-auto-rows: minmax(45px,auto);
+        &__item {
+            grid-template-columns: 45px auto;
+            column-gap: 10px;
+            &-text {
+                font-size: 25px;
+            }
+            &-img {
+                width: 35px;
+                height: 35px;
+            }
+            &_files {
+                .header__menu__files-counter {
+                    font-size: 25px;
+                    width: 35px;
+                    height: 35px;
+                    justify-self: center;
+                }
+            }
+            &:last-child {
+                svg {
+                    width: 45px;
+                    height: 35px;
+                }
+            }
+        }
+    }
+    .hamburger {
+        height: 35px;
+        span {
+            width: 50px;
+            height: 4px;
+        }
+        &.expanded span:first-child {
+            transform: translateY(15px) rotate(45deg);
+        }
+        &.expanded span:last-child {
+            transform: translateY(-15px) rotate(-45deg);
+        }
+    }
+    .main {
+        padding: 50px 30px;
+        &__header {
+            font-size: 50px;
+        }
+        &__subheader {
+            font-size: 25px;
+            max-width: 700px;
+            margin-top: 35px;
+        }
+        &__btnupload {
+            margin-top: 30px;
+            font-size: 30px;
+            width: 500px;
+            height: 110px;
+            border-radius: 30px;
+        }
+        &__dragtext {
+            font-size: 18px;
+            margin-top: 15px;
+        }
+        &__icon {
+            margin-top: 20px;
+            max-width: 235px;
+            &-img {
+                width: 45px;
+                height: 45px;
+            }
+            &-text {
+                font-size: 35px;
+            }
+        }
+    }
+    .footer {
+        padding: 18px 33px;
+        min-height: 60px;
+        &__text {
+            font-size: 18px;
+        }
+    }
+    .modal {
+        &__logo {
+            display: none;
+        }
+        &__header, &_register .modal__header {
+            font-size: 35px;
+            margin-top: 0;
+        }
+        &__form {
+            margin-top: 20px;
+            &__password-difficult {
+                &-indicator {
+                    width: 450px;
+                    height: 6px;
+                    margin-bottom: 5px;
+                }
+                &-text {
+                    font-size: 16px;
+                }
+            }
+            &__input {
+                padding: 0 20px 0 60px;
+                width: 450px;
+                font-size: 20px;
+                height: 55px;
+                border-radius: 20px;
+                &__wrapper {
+                    margin-bottom: 10px;
+                    &_mail img {
+                        width: 25px;
+                        height: 18px;
+                        top: 19px;
+                        left: 25px;
+                    }
+                    &_password img, &_confirm img {
+                        width: 20px;
+                        height: 25px;
+                        top: 14px;
+                        left: 27px;
+                    }
+                    &_login img {
+                        width: 23px;
+                        height: 25px;
+                        top: 14px;
+                        left: 26px;
+                    }
+                }
+            }
+            &__text {
+                font-size: 16px;
+                margin-top: 10px;
+            }
+            &__btn {
+                width: 450px;
+                font-size: 25px;
+                margin-top: 15px;
+                margin-bottom: 10px;
+                height: 55px;
+                border-radius: 20px;
+            }
+        }
+    }
+}
+
+@media (max-width: 991.98px) {
+    .header {
+        padding: 15px 20px;
+        height: 80px;
+        &__logo {
+            &__img {
+                width: 80px;
+                height: 30px;
+            }
+            &__text {
+                font-size: 30px;
+            }
+        }
+        &__menu {
+            min-width: 350px;
+            &__profile {
+                &-text {
+                    font-size: 18px;
+                }
+                &-logo {
+                    width: 40px;
+                    height: 40px;
+                    img {
+                        width: 20px;
+                        height: 23px;
+                    }
+                }
+            }
+            &-loginbtn {
+                width: 80px;
+                margin-right: 15px;
+                height: 40px;
+                border-radius: 10px;
+                font-size: 20px;
+            }
+        }
+    }
+    .hamburger {
+        height: 25px;
+        span {
+            width: 35px;
+            height: 3px;
+        }
+        &.expanded span:first-child {
+            transform: translateY(10px) rotate(45deg);
+        }
+        &.expanded span:last-child {
+            transform: translateY(-12px) rotate(-45deg);
+        }
+    }
+    .menu {
+        top: 100px;
+        right: 20px;
+        padding: 15px 20px;
+        width: 240px;
+        grid-template-rows: repeat(3,minmax(30px,auto));
+        grid-auto-rows: minmax(30px,auto);
+        &__item {
+            grid-template-columns: 40px auto;
+            column-gap: 10px;
+            &-text {
+                font-size: 20px;
+            }
+            &-img {
+                width: 30px;
+                height: 30px;
+            }
+            &_files .header__menu__files-counter {
+                font-size: 20px;
+                width: 30px;
+                height: 30px;
+                justify-self: center;
+            }
+            &:last-child {
+                svg {
+                    width: 40px;
+                    height: 30px;
+                    justify-self: center;
+                }
+            }
+        }
+    }
+    .main {
+        padding: 40px 20px;
+        &__header {
+            font-size: 40px;
+        }
+        &__subheader {
+            margin-top: 25px;
+            font-size: 20px;
+            max-width: 500px;
+        }
+        &__btnupload {
+            margin-top: 20px;
+            font-size: 25px;
+            width: 400px;
+            height: 80px;
+            border-radius: 20px;
+        }
+        &__dragtext {
+            font-size: 16px;
+        }
+        &__icon {
+            margin-top: 15px;
+            max-width: 200px;
+            &-img {
+                width: 35px;
+                height: 35px;
+            }
+            &-text {
+                font-size: 30px;
+            }
+        }
+    }
+    .footer {
+        padding: 13px 33px;
+        min-height: 45px;
+        &__text {
+            font-size: 16px;
+        }
+    }
+    .modal {
+        &_register {
+            .modal__form__btn {
+                margin: 10px 0;
+            }
+            .modal__form {
+                margin-top: 15px;
+            }
+        }
+        &__header {
+            font-size: 30px;
+        }
+        &__form {
+            margin-top: 15px;
+            &__btn {
+                width: 350px;
+                font-size: 18px;
+                height: 45px;
+                border-radius: 15px;
+            }
+            &__input {
+                padding: 0px 20px 0 40px;
+                width: 350px;
+                font-size: 18px;
+                height: 45px;
+                border-radius: 15px;
+                &__wrapper {
+                    margin-bottom: 5px;
+                    &_mail img {
+                        width: 20px;
+                        height: 15px;
+                        top: 16px;
+                        left: 13px;
+                    }
+                    &_password img, &_confirm img {
+                        width: 15px;
+                        height: 20px;
+                        top: 12px;
+                        left: 16px;
+                    }
+                    &_login img {
+                        width: 18px;
+                        height: 20px;
+                        top: 12px;
+                        left: 15px;
+                    }
+                }
+            }
+            &__text {
+                font-size: 14px;
+                margin-top: 5px;
+            }
+            &__password-difficult {
+                &-indicator {
+                    width: 350px;
+                    height: 6px;
+                    margin-bottom: 5px;
+                }
+                &-text {
+                    font-size: 14px;
+                }
+            }
+            
+        }
+    }
+}
+
+@media (max-width: 767.98px) {
+    .header {
+        height: 70px;
+        &__logo {
+            &__img {
+                width: 60px;
+                height: 22px;
+            }
+            &__text {
+                font-size: 20px;
+            }
+        }
+        &__menu {
+            min-width: 200px;
+            &-loginbtn {
+                width: 70px;
+                height: 35px;
+                border-radius: 8px;
+                font-size: 18px;
+            }
+            &__profile {
+                &-text {
+                    font-size: 14px;
+                    margin-right: 10px;
+                }
+                &-logo {
+                    width: 30px;
+                    height: 30px;
+                    img {
+                        width: 16px;
+                        height: 18px;
+                    }
+                }
+            }
+        }
+    }
+    .menu {
+        padding: 15px 20px;
+        top: 85px;
+        width: 220px;
+        &__item {
+            &-text {
+                font-size: 18px;
+            }
+        }
+    }
+    .main {
+        &__header {
+            font-size: 35px;
+        }
+        &__subheader {
+            margin-top: 20px;
+            font-size: 18px;
+            max-width: 400px;
+        }
+        &__dragtext {
+            max-width: 350px;
+            font-size: 14px;
+        }
+        &__icon {
+            max-width: 173px;
+            &-text {
+                font-size: 25px;
+            }
+        }
+        &__btnupload {
+            margin-top: 15px;
+            font-size: 20px;
+            width: 350px;
+            height: 60px;
+            border-radius: 15px;
+        }
+    }
+    .footer {
+        padding: 15px 20px;
+        &__text {
+            font-size: 14px;
+        }
+    }
 }

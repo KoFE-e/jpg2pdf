@@ -29,42 +29,40 @@
 <body>
 <header class="header">
     <!-- _login к header -->
-    <div class="container">
-        <div class="header__wrapper">
-            <div class="header__logo">
-                <img src="../assets/icons/akbars_bank_logo.png" alt="logo" class="header__logo__img">
-                <div class="header__logo__text">
-                    Converter
+    <div class="header__wrapper">
+        <div class="header__logo">
+            <img src="../assets/icons/akbars_bank_logo.png" alt="logo" class="header__logo__img">
+            <div class="header__logo__text">
+                Converter
+            </div>
+        </div>
+        <div class="header__menu">
+            <div class="header__menu__files" data-trigger="login">
+                <div class="header__menu__files-text">
+                    My files
+                </div>
+                <div class="header__menu__files-counter">7</div>
+            </div>
+            <div class="header__menu__profile">
+                <div class="header__menu__profile-text">
+                    Петровых Евгений
+                </div>
+                <div class="header__menu__profile-logo">
+                    <img src="../assets/icons/profile.png" alt="profile" class="header__menu__profile-img">
                 </div>
             </div>
-            <div class="header__menu">
-                <div class="header__menu__files">
-                    <div class="header__menu__files-text">
-                        My files
-                    </div>
-                    <div class="header__menu__files-counter">7</div>
-                </div>
-                <div class="header__menu__profile">
-                    <div class="header__menu__profile-text">
-                        Петровых Евгений
-                    </div>
-                    <div class="header__menu__profile-logo">
-                        <img src="../assets/icons/profile.png" alt="profile" class="header__menu__profile-img">
-                    </div>
-                </div>
 
-                <button class="header__menu-loginbtn" data-trigger="login">
-                    Sign in
-                </button>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+            <button class="header__menu-loginbtn" data-trigger="login">
+                Sign in
+            </button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </div>
-    <div class="menu" style="bottom: -270px;">
+    <div class="menu">
         <div class="menu__item">
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                  width="41.000000pt" height="39.000000pt" viewBox="0 0 41.000000 39.000000"
@@ -117,6 +115,12 @@
             </svg>
             <div class="menu__item-text">Theme: <span>System</span></div>
         </div>
+        <div class="menu__item menu__item_files" data-trigger="login">
+            <div class="header__menu__files-counter">7</div>
+            <div class="header__menu__files-text menu__item-text">
+                My files
+            </div>
+        </div>
         <div class="menu__item">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="47px" height="39px" viewBox="0 0 46 39" version="1.1">
                 <g id="surface1" fill="rgb(60.392157%,60.392157%,60.392157%)">
@@ -136,14 +140,14 @@
             Convert JPG to PDF
         </h1>
         <div class="main__subheader">
-            Convert your images to PDF <br>online and free with text recognition
+            Convert your images to PDF online and free with text recognition
         </div>
         <label class="main__btnupload" type="file" id="files" name="files" accept="image/jpeg image/jpg">
             <input type="file" id="files" data-jpgtopdf name="files" accept="image/jpeg image/jpg" multiple>
             Select JPG images
         </label>
         <div class="main__dragtext">
-            Or drag and drop files with your mouse here <br> Maximum file size not exceeding 200 MB
+            Or drag and drop files with your mouse here. Maximum file size not exceeding 200 MB
         </div>
         <a href="index.html" class="main__icon main__icon_eng">
             <img src="../assets/icons/convert.png" alt="upload" class="main__icon-img">

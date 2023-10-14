@@ -29,7 +29,6 @@
 <body>
 <header class="header">
     <!-- _login к header -->
-    <div class="container">
         <div class="header__wrapper">
             <div class="header__logo">
                 <img src="assets/icons/akbars_bank_logo.png" alt="logo" class="header__logo__img">
@@ -38,7 +37,7 @@
                 </div>
             </div>
             <div class="header__menu">
-                <div class="header__menu__files">
+                <div class="header__menu__files" data-trigger="login">
                     <div class="header__menu__files-text">
                         Мои файлы
                     </div>
@@ -63,7 +62,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <div class="menu">
         <div class="menu__item">
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -117,6 +115,12 @@
             </svg>
             <div class="menu__item-text">Тема: <span>Система</span></div>
         </div>
+        <div class="menu__item menu__item_files" data-trigger="login">
+            <div class="header__menu__files-counter">7</div>
+            <div class="header__menu__files-text menu__item-text">
+                Мои файлы
+            </div>
+        </div>
         <div class="menu__item">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="47px" height="39px" viewBox="0 0 46 39" version="1.1">
                 <g id="surface1" fill="rgb(60.392157%,60.392157%,60.392157%)">
@@ -136,14 +140,14 @@
             Конвертация PDF в JPG
         </h1>
         <div class="main__subheader">
-            Конвертируйте ваши документы PDF в изображения JPG<br>онлайн и бесплатно
+            Конвертируйте ваши документы PDF в изображения JPG онлайн и бесплатно
         </div>
         <label class="main__btnupload" type="file" id="files" name="files" accept="application/pdf">
             <input type="file" id="files" data-pdftojpg name="files" accept="application/pdf" multiple>
             Выбрать файлы PDF
         </label>
         <div class="main__dragtext">
-            Или перетащите файлы мышью сюда. <br>Максимальный размер файла не более 10 МБ
+            Или перетащите файлы мышью сюда. Максимальный размер файла не более 10 МБ
         </div>
         <a href="jpgtopdf.html" class="main__icon">
             <img src="assets/icons/convert.png" alt="upload" class="main__icon-img">
