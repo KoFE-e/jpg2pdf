@@ -50,7 +50,7 @@ gulp.task('styles', function() {
         .pipe(autoprefixer())
         .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(gulp.dest(`${dist}/assets/css`))
-        .pipe(gulp.dest("src/css"))
+        .pipe(gulp.dest("src/assets/css"))
         .pipe(browserSync.stream());
 });
 

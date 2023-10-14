@@ -24,7 +24,7 @@
     <meta name="msapplication-TileImage" content="assets/icons/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-    <title>Конвертация PDF в JPG</title>
+    <title>Конвертация PDF в JPG | AkbarsConverter</title>
 </head>
 <body>
 <header class="header">
@@ -37,22 +37,21 @@
                     Конвертер
                 </div>
             </div>
-            <!-- _login к header__menu -->
             <div class="header__menu">
                 <div class="header__menu__files">
                     <div class="header__menu__files-text">
                         Мои файлы
                     </div>
-                    <!-- <div class="header__menu__files-counter">7</div> -->
+                    <div class="header__menu__files-counter">7</div>
                 </div>
-                <!-- <div class="header__menu__profile">
+                <div class="header__menu__profile">
                     <div class="header__menu__profile-text">
                         Петровых Евгений
                     </div>
                     <div class="header__menu__profile-logo">
                         <img src="assets/icons/profile.png" alt="profile" class="header__menu__profile-img">
                     </div>
-                </div> -->
+                </div>
 
                 <button class="header__menu-loginbtn" data-trigger="login">
                     Вход
@@ -91,7 +90,7 @@
                     13z"/>
                 </g>
             </svg>
-            <div class="menu__item-text">Язык: Русский</div>
+            <a href="en/jpgtopdf.html" class="menu__item-text">Язык: Русский</a>
         </div>
         <div class="menu__item" data-theme="system">
             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -139,8 +138,8 @@
         <div class="main__subheader">
             Конвертируйте ваши изображения в формат PDF <br>онлайн и бесплатно с распознаванием текста
         </div>
-        <label class="main__btnupload" type="file" id="files" name="files" accept="image/jpeg">
-            <input type="file" id="files" name="files" accept="image/jpeg" multiple>
+        <label class="main__btnupload" type="file" id="files" name="files" accept="image/jpeg image/jpg">
+            <input type="file" id="files" data-jpgtopdf name="files" accept="image/jpeg image/jpg" multiple>
             Выбрать изображения JPG
         </label>
         <div class="main__dragtext">
@@ -255,72 +254,5 @@
 </div>
 
 <script src="script.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
-<script>
-    window.jsPDF = window.jspdf.jsPDF
-
-    var getImageFromUrl = function(url, callback) {
-        var img = new Image();
-
-        img.onerror = function() {
-            alert('Cannot load image: "' + url + '"');
-        };
-        img.onload = function() {
-            callback(img);
-        };
-        img.src = url;
-    }
-
-    var createPDF = function(imgData) {
-        var doc = new jsPDF();
-
-        doc.addImage(imgData, 'JPEG', 10, 10, 190, 190, 'image');
-
-        var pdfDataUri = doc.output('datauristring');
-        var a = document.createElement('a');
-        a.href = pdfDataUri;
-        a.download = 'image.pdf';
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-    }
-
-    function ConvertFile(file) {
-        if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var imgData = new Image();
-                imgData.src = e.target.result;
-                imgData.onload = function() {
-                    createPDF(imgData);
-                };
-            };
-            reader.readAsDataURL(file);
-        } else {
-            alert('Please drop a valid JPG image.');
-        }
-    }
-
-    // Handle file drop event
-    var dropArea = document.getElementById('files')
-    dropArea.addEventListener('dragover', function(e) {
-        e.preventDefault();
-    });
-
-    dropArea.addEventListener('change', function(event) {
-        var file = event.target.files[0];
-
-        ConvertFile(file)
-    });
-
-    dropArea.addEventListener('drop', function(e) {
-        e.preventDefault();
-
-        var file = e.dataTransfer.files[0];
-
-        ConvertFile(file)
-    });
-</script>
 </body>
 </html>

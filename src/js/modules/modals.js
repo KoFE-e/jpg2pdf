@@ -3,10 +3,8 @@ const modal = () => {
     function bindModal(triggerSelector, modalSelector) {
         const trigger = document.querySelectorAll(triggerSelector),
               modal = document.querySelector(modalSelector),
-              windows = document.querySelectorAll('[data-modal]'),
-              scroll = calcScroll();
+              windows = document.querySelectorAll('[data-modal]');
 
-        console.log(windows);
         function closeAllModals() {
             windows.forEach(item => {
                 item.classList.remove('modal_active');

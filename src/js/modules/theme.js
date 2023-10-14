@@ -2,7 +2,8 @@ const theme = () => {
 
     const trigger = document.querySelector('[data-theme]'),
           triggerText = trigger.querySelector('span'),
-          body = document.body;
+          body = document.body,
+          lang = document.documentElement.lang;
 
     let curTheme = trigger.getAttribute('data-theme');
 
@@ -23,17 +24,29 @@ const theme = () => {
     trigger.addEventListener('click', () => {
         if (curTheme === 'system') {
             curTheme = 'light';
-            triggerText.innerHTML = 'Светлая';
+            if (lang === 'ru') {
+                triggerText.innerHTML = 'Светлая';
+            } else {
+                triggerText.innerHTML = 'Light';
+            }
             body.classList.remove('dark');
             trigger.setAttribute('data-theme', 'light');
         } else if (curTheme === 'light') {
             curTheme = 'dark';
-            triggerText.innerHTML = 'Темная';
+            if (lang === 'ru') {
+                triggerText.innerHTML = 'Темная';
+            } else {
+                triggerText.innerHTML = 'Dark';
+            }
             body.classList.add('dark');
             trigger.setAttribute('data-theme', 'dark');
         } else if (curTheme === 'dark') {
             curTheme = 'system';
-            triggerText.innerHTML = 'Система';
+            if (lang === 'ru') {
+                triggerText.innerHTML = 'Система';
+            } else {
+                triggerText.innerHTML = 'System';
+            }
             switchSystemTheme();
             trigger.setAttribute('data-theme', 'system');
         }

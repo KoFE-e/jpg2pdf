@@ -25,11 +25,10 @@
         }
     }
     &__menu {
-        min-width: 530px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         &-loginbtn {
+            margin-right: 40px;
             width: 169px;
             height: 76px;
             border-radius: 18px;
@@ -47,7 +46,7 @@
             }
         }
         &__profile {
-            display: flex;
+            display: none;
             align-items: center;
             margin-right: 30px;
             &-text {
@@ -75,14 +74,15 @@
             display: flex;
             align-items: center;
             cursor: pointer;
+            margin-right: 20px;
             &-text {
                 font-size: 40px;
                 font-weight: 400;
                 color: #2b2b2b;
-                margin-right: 20px;
+                margin-right: 10px;
             }
             &-counter {
-                display: flex;
+                display: none;
                 justify-content: center;
                 align-items: center;
                 width: 61px;
@@ -93,18 +93,20 @@
                 line-height: 1.2;
                 font-weight: 400;
                 color: #fff;
-                margin-right: 28px;
             }
             transition: 0.6s all;
             &:hover {
                 transform: scale(1.05);
             }
         }
-        &_login {
-            min-width: 820px;
-        }
     }
     &_login {
         padding: 23px 32px;
+        .header__menu__files-counter, .header__menu__profile {
+            display: flex;
+        }
+        .header__menu {
+            min-width: 820px;
+        }
     }
 }
