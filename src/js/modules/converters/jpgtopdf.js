@@ -1,6 +1,8 @@
 import {jsPDF} from 'jspdf';
+import { success, error } from '../notifications';
 
 const jpgtopdf = () => {
+    const lang = document.documentElement.lang;
 
     const createPDF = function(imgData) {
         const doc = new jsPDF();
@@ -18,7 +20,7 @@ const jpgtopdf = () => {
     }
 
     function ConvertFile(file) {
-        if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
+        if (file.size != 0 && (file.type === 'image/jpeg' || file.type === 'image/jpg')) {
             const reader = new FileReader();
             reader.onload = function(e) {
                 const imgData = new Image();
@@ -28,8 +30,17 @@ const jpgtopdf = () => {
                 };
             };
             reader.readAsDataURL(file);
+            if (lang === 'en') {
+                success('The file has been successfully converted. Check downloads');
+            } else {
+                success('Файл успешно конвертирован. Проверьте загрузки');
+            }
         } else {
-            alert('Please drop a valid JPG image.');
+            if (lang === 'en') {
+                error('Please drop a valid JPG image.');
+            } else {
+                error('Пожалуйста, поместите JPG файл');
+            }
         }
     }
 
@@ -53,7 +64,15 @@ const jpgtopdf = () => {
 
             ConvertFile(file)
         });
-    } catch(e) {}
+    } catch(e) {
+        if (e.name !== 'TypeError') {
+            if (lang === 'en') {
+                error(e);
+            } else {
+                error(e);
+            }
+        }
+    }
     
 }
 

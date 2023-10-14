@@ -37,6 +37,7 @@
         "html2canvas": "^1.4.1",
         "jspdf": "^2.5.1",
         "nouislider": "^15.6.1",
-        "pdfjs-dist": "2.5.207"
+        "pdfjs-dist": "2.5.207",
+        "sweetalert2": "^11.7.32"
     }
 }

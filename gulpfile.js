@@ -39,7 +39,7 @@ gulp.task("build-js", () => {
                         ]
                       }
                 }))
-                .pipe(gulp.dest(dist))
+                .pipe(gulp.dest(`${dist}/js`))
                 .on("end", browserSync.reload);
 });
 

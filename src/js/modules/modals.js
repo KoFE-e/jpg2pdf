@@ -34,21 +34,6 @@ const modal = () => {
         });
     }
 
-    function calcScroll() {
-        let div = document.createElement('div');
-
-        div.style.width = '50px';
-        div.style.height = '50px';
-        div.style.overflowY = 'scroll';
-        div.style.visibility = 'hidden';
-
-        document.body.appendChild(div);
-        let scrollWidth = div.offsetWidth - div.clientWidth;
-        div.remove();
-
-        return scrollWidth;
-    }
-
     bindModal('[data-trigger="login"]', '.modal_login');
     bindModal('[data-trigger="register"]', '.modal_register');
     bindModal('[data-trigger="help"]', '.modal_help');
