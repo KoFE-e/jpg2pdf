@@ -716,10 +716,8 @@
                 width: 300px;
             }
         }
-        &_register {
-            .modal__header {
-                font-size: 25px;
-            }
+        &_register .modal__header {
+            font-size: 25px;
         }
     }
 }
