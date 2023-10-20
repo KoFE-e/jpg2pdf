@@ -15,6 +15,11 @@
             }
         }
     }
+    .modal {
+        &__files-list {
+            grid-template-columns: 1100px;
+        }
+    }
 }
 @media (max-width: 1439.98px) {
     .header {
@@ -127,6 +132,24 @@
         }
     }
     .modal {
+        &__files-list {
+            grid-template-columns: 1000px;
+            grid-template-rows: repeat(3, 100px);
+            grid-auto-rows: 100px;
+        }
+        &__file {
+            padding: 15px 30px;
+            column-gap: 15px;
+            border-radius: 30px;
+            &__text {
+                &-filename {
+                    font-size: 30px;
+                }
+                &-link {
+                    font-size: 24px;
+                }
+            }
+        }
         &__header {
             margin-top: 20px;
             font-size: 45px;
@@ -373,6 +396,37 @@
                 border-radius: 20px;
             }
         }
+        &_files {
+            .modal {
+                &__header {
+                    margin-top: 60px;
+                }
+                &__subheader {
+                    font-size: 25px;
+                }
+            }
+        }
+        &__files-list {
+            max-height: 60%;
+            margin-top: 50px;
+            grid-template-columns: 800px;
+            grid-template-rows: repeat(3, 90px);
+            grid-auto-rows: 90px;
+        }
+        &__file {
+            &__text {
+                &-filename {
+                    font-size: 28px;
+                }
+                &-link {
+                    font-size: 20px;
+                }
+            }
+            &-delete {
+                width: 25px;
+                height: 25px;
+            }
+        }
     }
 }
 
@@ -498,6 +552,39 @@
         }
     }
     .modal {
+        &_files {
+            .modal {
+                &__subheader {
+                    font-size: 20px;
+                }
+            }
+        }
+        &__files-list {
+            grid-template-columns: 600px;
+            grid-template-rows: repeat(3, 80px);
+            grid-auto-rows: 80px;
+            margin-top: 40px;
+        }
+        &__file {
+            padding: 10px 20px;
+            grid-template-columns: 35px 1fr 20px;
+            &__text {
+                &-filename {
+                    font-size: 25px;
+                }
+                &-link {
+                    font-size: 17px;
+                }
+            }
+            &__img {
+                width: 35px;
+                height: 35px;
+            }
+            &-delete {
+                width: 20px;
+                height: 20px;
+            }
+        }
         &_register {
             .modal__form__btn {
                 margin: 10px 0;
@@ -565,6 +652,34 @@
 }
 
 @media (max-width: 767.98px) {
+    .modal {
+        &_files {
+            .modal {
+                &__header {
+                    margin-top: 50px;
+                }
+                &__subheader {
+                    font-size: 18px;
+                }
+            }
+        }
+        &__files-list {
+            max-height: 70%;
+            margin-top: 30px;
+            grid-template-columns: 450px;
+        }
+        &__file {
+            padding: 10px 20px;
+            border-radius: 20px;
+            &__text {
+                &-link {
+                    display: block;
+                    max-width: 300px;
+                    overflow: hidden;
+                }
+            }
+        }
+    }
     .header {
         height: 70px;
         &__logo {
@@ -721,6 +836,45 @@
         }
         &_register .modal__header {
             font-size: 25px;
+        }
+        &_files {
+            .modal {
+                &__content {
+                    padding: 30px 0;
+                    max-height: 85%;
+                }
+                &__header {
+                    margin-top: 0px;
+                }
+                &__subheader {
+                    font-size: 16px;
+                }
+                &__files-list {
+                    max-height: 80%;
+                    margin-top: 20px;
+                    grid-template-columns: 300px;
+                    grid-template-rows: repeat(3, 70px);
+                    grid-auto-rows: 70px;
+                    row-gap: 15px;
+                }
+            }
+        }
+        &__file {
+            padding: 10px;
+            grid-template-columns: 25px 1fr 20px;
+            column-gap: 10px;
+            &__img {
+                width: 25px;
+                height: 25px;
+            }
+            &__text {
+                &-filename {
+                    font-size: 20px;
+                }
+                &-link {
+                    max-width: 200px;
+                }
+            }
         }
     }
 }

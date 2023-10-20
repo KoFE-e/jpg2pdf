@@ -69,5 +69,13 @@ body.dark {
                 outline: 1px solid #fff;
             }
         }
+        &__file {
+            background-color: #323232;
+            &__text {
+                &-filename {
+                    color: #fff;
+                }
+            }
+        }
     }
 }
