@@ -12,24 +12,27 @@ const jpgtopdf = () => {
         const pdfDataUri = doc.output('datauristring');
         const a = document.createElement('a');
         a.href = pdfDataUri;
-        a.download = 'image.pdf';
+        a.download = 'converted.pdf';
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-    }
 
-    function ConvertFile(file) {
+        const pdfBlob = doc.output('blob');
+        const fileToSend = new File([pdfBlob], 'converted.pdf', { type: 'application/pdf' });
+
         // отправляем файл на сервер
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('file', fileToSend);
         formData.append('username', sessionStorage.getItem("username"));
 
         const xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
         xhr.send(formData);
         //
+    }
 
+    function ConvertFile(file) {
         if (file.size != 0 && (file.type === 'image/jpeg' || file.type === 'image/jpg')) {
             const reader = new FileReader();
             reader.onload = function(e) {
