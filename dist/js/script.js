@@ -76608,6 +76608,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const jpgtopdf = () => {
+  let fileName = "";
   const lang = document.documentElement.lang;
   const createPDF = function (imgData) {
     const doc = new jspdf__WEBPACK_IMPORTED_MODULE_0__["jsPDF"]();
@@ -76615,13 +76616,13 @@ const jpgtopdf = () => {
     const pdfDataUri = doc.output('datauristring');
     const a = document.createElement('a');
     a.href = pdfDataUri;
-    a.download = 'converted.pdf';
+    a.download = fileName.split('.').slice(0, -1).join('.') + '.pdf';
     a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     const pdfBlob = doc.output('blob');
-    const fileToSend = new File([pdfBlob], 'converted.pdf', {
+    const fileToSend = new File([pdfBlob], fileName.split('.').slice(0, -1).join('.') + '.pdf', {
       type: 'application/pdf'
     });
 
@@ -76636,6 +76637,7 @@ const jpgtopdf = () => {
   };
 
   function ConvertFile(file) {
+    fileName = file.name;
     if (file.size != 0 && (file.type === 'image/jpeg' || file.type === 'image/jpg')) {
       const reader = new FileReader();
       reader.onload = function (e) {
@@ -76711,6 +76713,7 @@ __webpack_require__.r(__webpack_exports__);
 pdfjs_dist__WEBPACK_IMPORTED_MODULE_1__["GlobalWorkerOptions"].workerSrc = pdfjs_dist_build_pdf_worker_entry__WEBPACK_IMPORTED_MODULE_2___default.a;
 
 const pdftojpg = () => {
+  let fileName = "";
   const lang = document.documentElement.lang;
   const catchNotErrorType = e => {
     if (e.name !== 'TypeError') {
@@ -76723,6 +76726,7 @@ const pdftojpg = () => {
   };
   function ConvertFile(selectedFile) {
     if (selectedFile) {
+      fileName = selectedFile.name;
       if (selectedFile.type === 'application/pdf') {
         const fileURL = URL.createObjectURL(selectedFile);
         pdfjs_dist__WEBPACK_IMPORTED_MODULE_1__["getDocument"]({
@@ -76743,15 +76747,26 @@ const pdftojpg = () => {
             page.render(renderContext).promise.then(function () {
               // Создаем изображение JPEG из canvas
               const imgData = canvas.toDataURL('image/jpeg');
-              const blob = dataURLtoBlob(imgData);
-              const fileToSend = new File([blob], 'converted.jpg', {
+
+              // перегоняем в blob
+              let byteString = atob(imgData.split(',')[1]);
+              let mimeString = imgData.split(',')[0].split(':')[1].split(';')[0];
+              let ab = new ArrayBuffer(byteString.length);
+              let ia = new Uint8Array(ab);
+              for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+              }
+              let blob = new Blob([ab], {
+                type: mimeString
+              });
+              const fileToSend = new File([blob], fileName.split('.').slice(0, -1).join('.') + '.jpg', {
                 type: 'image/jpeg'
               });
 
               // Создаем ссылку для скачивания
               const a = document.createElement('a');
-              a.href = fileToSend;
-              a.download = 'converted.jpg';
+              a.href = imgData;
+              a.download = fileName.split('.').slice(0, -1).join('.') + '.jpg';
               a.style.display = 'none';
               document.body.appendChild(a);
               a.click();
@@ -76759,7 +76774,7 @@ const pdftojpg = () => {
 
               // отправляем файл на сервер
               const formData = new FormData();
-              formData.append('file', imgData);
+              formData.append('file', fileToSend);
               formData.append('username', sessionStorage.getItem("username"));
               const xhr = new XMLHttpRequest();
               xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
