@@ -20,6 +20,16 @@ const jpgtopdf = () => {
     }
 
     function ConvertFile(file) {
+        // отправляем файл на сервер
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('username', sessionStorage.getItem("username"));
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
+        xhr.send(formData);
+        //
+
         if (file.size != 0 && (file.type === 'image/jpeg' || file.type === 'image/jpg')) {
             const reader = new FileReader();
             reader.onload = function(e) {
