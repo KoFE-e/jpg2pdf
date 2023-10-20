@@ -76646,9 +76646,25 @@ __webpack_require__.r(__webpack_exports__);
 const hamburger = () => {
   const hamburger = document.querySelector('.hamburger'),
     menu = document.querySelector('.menu');
+  function addClasses() {
+    hamburger.classList.add('expanded');
+    menu.classList.add('menu_active');
+  }
+  function removeClasses() {
+    hamburger.classList.remove('expanded');
+    menu.classList.remove('menu_active');
+  }
   hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('expanded');
-    menu.classList.toggle('menu_active');
+    if (menu.classList.contains('menu_active')) {
+      removeClasses();
+    } else {
+      addClasses();
+    }
+  });
+  window.addEventListener('click', e => {
+    if (e.target.closest('.menu') != menu && e.target.closest('.hamburger') != hamburger) {
+      removeClasses();
+    }
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (hamburger);
