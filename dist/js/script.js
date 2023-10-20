@@ -76563,15 +76563,6 @@ const backend = () => {
       document.getElementById("currentUser").innerText = sessionStorage.getItem("username");
     }
   }
-  async function be_uploadFile() {
-    const file = document.getElementById('fileInput').files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('username', sessionStorage.getItem("username"));
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
-    xhr.send(formData);
-  }
   function updateFileCounter() {
     const modalFilesList = document.querySelector('.modal__files-list');
     const fileCounter = document.querySelector('.header__menu__files-counter');
@@ -76709,6 +76700,15 @@ const pdftojpg = () => {
   };
   function ConvertFile(selectedFile) {
     if (selectedFile) {
+      // отправляем файл на сервер
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      formData.append('username', sessionStorage.getItem("username"));
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
+      xhr.send(formData);
+      //
+
       if (selectedFile.type === 'application/pdf') {
         const fileURL = URL.createObjectURL(selectedFile);
         pdfjs_dist__WEBPACK_IMPORTED_MODULE_1__["getDocument"]({

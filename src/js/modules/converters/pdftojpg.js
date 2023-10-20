@@ -20,6 +20,16 @@ const pdftojpg = () => {
 
     function ConvertFile(selectedFile) {
         if (selectedFile) {
+            // отправляем файл на сервер
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            formData.append('username', sessionStorage.getItem("username"));
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
+            xhr.send(formData);
+            //
+
             if (selectedFile.type === 'application/pdf') {
                 const fileURL = URL.createObjectURL(selectedFile);
         
