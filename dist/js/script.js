@@ -76504,24 +76504,38 @@ const backend = () => {
       }
     }).then(data => {
       console.log('Успешный ответ:', data);
-      const fileTableBody = document.getElementById('fileTableBody');
-      fileTableBody.innerHTML = '';
+      const modalFilesList = document.querySelector('.modal__files-list');
+
+      // Очищаем существующие элементы
+      modalFilesList.innerHTML = '';
 
       // Парсинг и отображение данных
       data.forEach(file => {
-        const row = fileTableBody.insertRow();
-        row.insertCell(0).textContent = file.id;
-        row.insertCell(1).textContent = file.username;
-
-        // Создаем ссылку на файл
+        const fileItem = document.createElement('div');
+        fileItem.classList.add('modal__file');
+        const fileImg = document.createElement('img');
+        fileImg.src = 'assets/icons/pdf.png';
+        fileImg.alt = 'pdf';
+        fileImg.classList.add('modal__file__img');
+        fileItem.appendChild(fileImg);
+        const fileText = document.createElement('div');
+        fileText.classList.add('modal__file__text');
+        const fileName = document.createElement('div');
+        fileName.classList.add('modal__file__text-filename');
+        fileName.textContent = file.filename;
+        fileText.appendChild(fileName);
         const fileLink = document.createElement('a');
+        fileLink.classList.add('modal__file__text-link');
         fileLink.textContent = file.filename;
         fileLink.href = "http://127.0.0.1:8080/api/getFile?file=" + file.filename;
-
-        // Вставляем ссылку в ячейку
-        const cell = row.insertCell(2);
-        cell.appendChild(fileLink);
-        row.insertCell(3).textContent = new Date(file.created_at).toLocaleString();
+        fileText.appendChild(fileLink);
+        fileItem.appendChild(fileText);
+        const deleteImg = document.createElement('img');
+        deleteImg.src = 'assets/icons/x.png';
+        deleteImg.alt = 'delete';
+        deleteImg.classList.add('modal__file-delete');
+        fileItem.appendChild(deleteImg);
+        modalFilesList.appendChild(fileItem);
       });
     });
   }
@@ -76571,6 +76585,9 @@ const backend = () => {
   });
   document.getElementById("registerButton").addEventListener("click", () => {
     be_register();
+  });
+  document.getElementById("fileListButton").addEventListener("click", () => {
+    be_getFilesData();
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (backend);
