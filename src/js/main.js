@@ -5,6 +5,7 @@ import theme from "./modules/theme";
 import jpgtopdf from "./modules/converters/jpgtopdf";
 import pdftojpg from "./modules/converters/pdftojpg";
 import login from "./modules/login";
+import backend from "./modules/backend";
 
 window.addEventListener('DOMContentLoaded', () => {
     'use strict';
@@ -16,4 +17,5 @@ window.addEventListener('DOMContentLoaded', () => {
     jpgtopdf();
     pdftojpg();
     login();
+    backend();
 });
