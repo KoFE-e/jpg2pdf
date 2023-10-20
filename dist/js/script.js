@@ -76450,7 +76450,6 @@ const backend = () => {
       method: 'GET'
     });
     const data = await response.json();
-    document.getElementById("response").innerText = data.message;
     if (data.success === "true") {
       sessionStorage.removeItem('isAuthenticated');
       sessionStorage.removeItem('username');
@@ -76580,6 +76579,16 @@ const backend = () => {
     be_getFilesData();
   });
   be_getFilesData();
+  const loginOrLogoutButton = document.getElementById("loginAndLogoutButton");
+  if (sessionStorage.getItem("isAuthenticated") !== "true") {
+    loginOrLogoutButton.innerText = "Вход";
+  } else {
+    loginOrLogoutButton.innerText = "Выйти";
+    loginOrLogoutButton.addEventListener("click", () => {
+      be_logout();
+      window.location.reload();
+    });
+  }
 };
 /* harmony default export */ __webpack_exports__["default"] = (backend);
 

@@ -27,7 +27,6 @@ const backend = () => {
         });
 
         const data = await response.json();
-        document.getElementById("response").innerText = data.message;
 
         if (data.success === "true") {
             sessionStorage.removeItem('isAuthenticated');
@@ -184,6 +183,17 @@ const backend = () => {
 
     be_getFilesData();
 
+    const loginOrLogoutButton = document.getElementById("loginAndLogoutButton");
+    if (sessionStorage.getItem("isAuthenticated") !== "true") {
+        loginOrLogoutButton.innerText = "Вход";
+    }
+    else {
+        loginOrLogoutButton.innerText = "Выйти";
+        loginOrLogoutButton.addEventListener("click", () => {
+            be_logout();
+            window.location.reload();
+        })
+    }
 }
 
 export default backend;
