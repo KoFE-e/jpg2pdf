@@ -116,7 +116,7 @@ const backend = () => {
 
                     const fileLink = document.createElement('a');
                     fileLink.classList.add('modal__file__text-link');
-                    fileLink.textContent = file.filename;
+                    fileLink.textContent = "Скачать";
                     fileLink.href = "http://127.0.0.1:8080/api/getFile?file=" + file.filename;
                     fileText.appendChild(fileLink);
 
@@ -130,9 +130,11 @@ const backend = () => {
 
                     modalFilesList.appendChild(fileItem);
                 });
+
+                const fileCounter = document.getElementById('fileCounter');
+                fileCounter.textContent = data.length;
             });
     }
-
 
     async function be_register() {
         const username = document.getElementById("r_username").value;
@@ -167,17 +169,16 @@ const backend = () => {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
 
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    document.getElementById('message').textContent = 'Файл успешно загружен и сохранен на сервере.';
-                } else {
-                    document.getElementById('message').textContent = 'Ошибка при загрузке файла и имени.';
-                }
-            }
-        };
-
         xhr.send(formData);
+    }
+
+    function updateFileCounter() {
+        const modalFilesList = document.querySelector('.modal__files-list');
+        const fileCounter = document.querySelector('.header__menu__files-counter');
+
+        const fileCount = modalFilesList.childElementCount;
+
+        fileCounter.textContent = fileCount;
     }
 
     document.getElementById("currentUser").innerText = sessionStorage.getItem("username")
@@ -193,6 +194,9 @@ const backend = () => {
     document.getElementById("fileListButton").addEventListener("click", () => {
         be_getFilesData();
     })
+
+    be_getFilesData();
+
 }
 
 export default backend;
