@@ -7,12 +7,12 @@ import pdftojpg from "./modules/converters/pdftojpg";
 import backend from "./modules/backend";
 import load from "./modules/load";
 
-theme();
 load();
 
 window.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
+    theme();
     hamburger();
     drag();
     modal();

@@ -9,7 +9,7 @@
         const link = document.querySelector("#loaderTheme"),
               theme = localStorage.getItem('theme');
         if (theme === 'dark' || theme === 'system' && window.matchMedia("(prefers-color-scheme: dark)")) {
-            link.setAttribute("href", "assets/css/dark_anims.css");
+            link.setAttribute("href", "../assets/css/dark_anims.css");
         } else {
             link.setAttribute("href", "");
         }
