@@ -10554,10 +10554,10 @@ var store = __webpack_require__(/*! ../internals/shared-store */ "./node_modules
 (module.exports = function (key, value) {
   return store[key] || (store[key] = value !== undefined ? value : {});
 })('versions', []).push({
-  version: '3.33.0',
+  version: '3.33.1',
   mode: IS_PURE ? 'pure' : 'global',
   copyright: '© 2014-2023 Denis Pushkarev (zloirock.ru)',
-  license: 'https://github.com/zloirock/core-js/blob/v3.33.0/LICENSE',
+  license: 'https://github.com/zloirock/core-js/blob/v3.33.1/LICENSE',
   source: 'https://github.com/zloirock/core-js'
 });
 
@@ -11337,13 +11337,12 @@ module.exports = defineIterator(Array, 'Array', function (iterated, kind) {
 }, function () {
   var state = getInternalState(this);
   var target = state.target;
-  var kind = state.kind;
   var index = state.index++;
   if (!target || index >= target.length) {
     state.target = undefined;
     return createIterResultObject(undefined, true);
   }
-  switch (kind) {
+  switch (state.kind) {
     case 'keys': return createIterResultObject(index, false);
     case 'values': return createIterResultObject(target[index], false);
   } return createIterResultObject([index, target[index]], false);

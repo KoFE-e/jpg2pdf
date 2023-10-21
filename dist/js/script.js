@@ -76390,9 +76390,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/theme */ "./src/js/modules/theme.js");
 /* harmony import */ var _modules_converters_jpgtopdf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/converters/jpgtopdf */ "./src/js/modules/converters/jpgtopdf.js");
 /* harmony import */ var _modules_converters_pdftojpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/converters/pdftojpg */ "./src/js/modules/converters/pdftojpg.js");
-/* harmony import */ var _modules_login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/login */ "./src/js/modules/login.js");
-/* harmony import */ var _modules_backend__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/backend */ "./src/js/modules/backend.js");
-
+/* harmony import */ var _modules_backend__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/backend */ "./src/js/modules/backend.js");
 
 
 
@@ -76409,8 +76407,7 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_theme__WEBPACK_IMPORTED_MODULE_3__["default"])();
   Object(_modules_converters_jpgtopdf__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_converters_pdftojpg__WEBPACK_IMPORTED_MODULE_5__["default"])();
-  Object(_modules_login__WEBPACK_IMPORTED_MODULE_6__["default"])();
-  Object(_modules_backend__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  Object(_modules_backend__WEBPACK_IMPORTED_MODULE_6__["default"])();
 });
 
 /***/ }),
@@ -76425,6 +76422,7 @@ window.addEventListener('DOMContentLoaded', () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 const backend = () => {
+  const header = document.querySelector('.header');
   async function be_login() {
     const login = document.getElementById("l_mail").value;
     const password = document.getElementById("l_password").value;
@@ -76443,6 +76441,7 @@ const backend = () => {
       sessionStorage.setItem('isAuthenticated', 'true');
       sessionStorage.setItem('username', login);
       document.getElementById("currentUser").innerText = sessionStorage.getItem("username");
+      header.classList.add('header_login');
     }
   }
   async function be_logout() {
@@ -76453,6 +76452,7 @@ const backend = () => {
     if (data.success === "true") {
       sessionStorage.removeItem('isAuthenticated');
       sessionStorage.removeItem('username');
+      header.classList.remove('header_login');
     }
   }
   async function waitFor200() {
@@ -76893,26 +76893,6 @@ const hamburger = () => {
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (hamburger);
-
-/***/ }),
-
-/***/ "./src/js/modules/login.js":
-/*!*********************************!*\
-  !*** ./src/js/modules/login.js ***!
-  \*********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-const login = () => {
-  const loginBtn = document.querySelector('.header__menu-loginbtn'),
-    header = document.querySelector('.header');
-  loginBtn.addEventListener('click', () => {
-    header.classList.toggle('header_login');
-  });
-};
-/* harmony default export */ __webpack_exports__["default"] = (login);
 
 /***/ }),
 

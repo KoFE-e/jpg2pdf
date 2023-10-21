@@ -1,4 +1,6 @@
 const backend = () => {
+    const header = document.querySelector('.header');
+
     async function be_login() {
         const login = document.getElementById("l_mail").value;
         const password = document.getElementById("l_password").value;
@@ -18,6 +20,7 @@ const backend = () => {
             sessionStorage.setItem('username', login);
 
             document.getElementById("currentUser").innerText = sessionStorage.getItem("username")
+            header.classList.add('header_login');
         }
     }
 
@@ -31,6 +34,7 @@ const backend = () => {
         if (data.success === "true") {
             sessionStorage.removeItem('isAuthenticated');
             sessionStorage.removeItem('username');
+            header.classList.remove('header_login');
         }
     }
 
