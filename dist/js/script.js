@@ -76563,6 +76563,7 @@ const backend = () => {
       sessionStorage.setItem('isAuthenticated', 'true');
       sessionStorage.setItem('username', username);
       document.getElementById("currentUser").innerText = sessionStorage.getItem("username");
+      header.classList.add('header_login');
     }
   }
   function updateFileCounter() {
