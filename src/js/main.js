@@ -5,14 +5,17 @@ import theme from "./modules/theme";
 import jpgtopdf from "./modules/converters/jpgtopdf";
 import pdftojpg from "./modules/converters/pdftojpg";
 import backend from "./modules/backend";
+import load from "./modules/load";
+
+theme();
 
 window.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
+    load();
     hamburger();
     drag();
     modal();
-    theme();
     jpgtopdf();
     pdftojpg();
     backend();

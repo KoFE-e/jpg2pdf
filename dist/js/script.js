@@ -76391,6 +76391,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_converters_jpgtopdf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/converters/jpgtopdf */ "./src/js/modules/converters/jpgtopdf.js");
 /* harmony import */ var _modules_converters_pdftojpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/converters/pdftojpg */ "./src/js/modules/converters/pdftojpg.js");
 /* harmony import */ var _modules_backend__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/backend */ "./src/js/modules/backend.js");
+/* harmony import */ var _modules_load__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/load */ "./src/js/modules/load.js");
 
 
 
@@ -76398,13 +76399,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+Object(_modules_theme__WEBPACK_IMPORTED_MODULE_3__["default"])();
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
+  Object(_modules_load__WEBPACK_IMPORTED_MODULE_7__["default"])();
   Object(_modules_hamburger__WEBPACK_IMPORTED_MODULE_0__["default"])();
   Object(_modules_drag__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_2__["default"])();
-  Object(_modules_theme__WEBPACK_IMPORTED_MODULE_3__["default"])();
   Object(_modules_converters_jpgtopdf__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_converters_pdftojpg__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_backend__WEBPACK_IMPORTED_MODULE_6__["default"])();
@@ -76896,6 +76899,27 @@ const hamburger = () => {
 
 /***/ }),
 
+/***/ "./src/js/modules/load.js":
+/*!********************************!*\
+  !*** ./src/js/modules/load.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const load = () => {
+  window.addEventListener('load', function () {
+    const load_screen = document.getElementById('load_screen');
+    const page = document.getElementById('body');
+    load_screen.style.display = 'none';
+    page.style.animation = 'page_init_anim 0.3s ease-in-out forwards';
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (load);
+
+/***/ }),
+
 /***/ "./src/js/modules/modals.js":
 /*!**********************************!*\
   !*** ./src/js/modules/modals.js ***!
@@ -77020,7 +77044,7 @@ const theme = () => {
     triggerText = trigger.querySelector('span'),
     body = document.body,
     lang = document.documentElement.lang;
-  let curTheme = trigger.getAttribute('data-theme');
+  let curTheme = localStorage.getItem('theme');
   function isSystemDark() {
     const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
     return darkThemeMq.matches;
@@ -77032,33 +77056,48 @@ const theme = () => {
       body.classList.remove('dark');
     }
   }
-  switchSystemTheme();
+  function prevTheme() {
+    const theme = localStorage.getItem('theme');
+    switch (theme) {
+      case 'dark':
+        body.classList.add('dark');
+        changeText('Темная', 'Dark');
+        break;
+      case 'light':
+        body.classList.remove('dark');
+        changeText('Светлая', 'Light');
+        break;
+      case 'system':
+        switchSystemTheme();
+        changeText('Система', 'System');
+        break;
+    }
+  }
+  prevTheme();
+  function changeText(rusTheme, enTheme) {
+    if (lang === 'ru') {
+      triggerText.innerHTML = rusTheme;
+    } else {
+      triggerText.innerHTML = enTheme;
+    }
+  }
   trigger.addEventListener('click', () => {
     if (curTheme === 'system') {
       curTheme = 'light';
-      if (lang === 'ru') {
-        triggerText.innerHTML = 'Светлая';
-      } else {
-        triggerText.innerHTML = 'Light';
-      }
+      localStorage.setItem('theme', 'light');
+      changeText('Светлая', 'Light');
       body.classList.remove('dark');
       trigger.setAttribute('data-theme', 'light');
     } else if (curTheme === 'light') {
       curTheme = 'dark';
-      if (lang === 'ru') {
-        triggerText.innerHTML = 'Темная';
-      } else {
-        triggerText.innerHTML = 'Dark';
-      }
+      localStorage.setItem('theme', 'dark');
+      changeText('Темная', 'Dark');
       body.classList.add('dark');
       trigger.setAttribute('data-theme', 'dark');
     } else if (curTheme === 'dark') {
       curTheme = 'system';
-      if (lang === 'ru') {
-        triggerText.innerHTML = 'Система';
-      } else {
-        triggerText.innerHTML = 'System';
-      }
+      localStorage.setItem('theme', 'system');
+      changeText('Система', 'System');
       switchSystemTheme();
       trigger.setAttribute('data-theme', 'system');
     }
