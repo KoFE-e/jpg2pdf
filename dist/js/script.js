@@ -76401,10 +76401,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 Object(_modules_theme__WEBPACK_IMPORTED_MODULE_3__["default"])();
+Object(_modules_load__WEBPACK_IMPORTED_MODULE_7__["default"])();
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
-  Object(_modules_load__WEBPACK_IMPORTED_MODULE_7__["default"])();
   Object(_modules_hamburger__WEBPACK_IMPORTED_MODULE_0__["default"])();
   Object(_modules_drag__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_2__["default"])();

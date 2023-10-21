@@ -8,11 +8,11 @@ import backend from "./modules/backend";
 import load from "./modules/load";
 
 theme();
+load();
 
 window.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
-    load();
     hamburger();
     drag();
     modal();
