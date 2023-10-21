@@ -2,6 +2,7 @@ import {jsPDF} from 'jspdf';
 import { success, error } from '../notifications';
 
 const jpgtopdf = () => {
+    let fileName = "";
     const lang = document.documentElement.lang;
 
     const createPDF = function(imgData) {
@@ -12,14 +13,28 @@ const jpgtopdf = () => {
         const pdfDataUri = doc.output('datauristring');
         const a = document.createElement('a');
         a.href = pdfDataUri;
-        a.download = 'image.pdf';
+        a.download = fileName.split('.').slice(0, -1).join('.') + '.pdf';
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+
+        const pdfBlob = doc.output('blob');
+        const fileToSend = new File([pdfBlob], fileName.split('.').slice(0, -1).join('.') + '.pdf', { type: 'application/pdf' });
+
+        // отправляем файл на сервер
+        const formData = new FormData();
+        formData.append('file', fileToSend);
+        formData.append('username', sessionStorage.getItem("username"));
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
+        xhr.send(formData);
+        //
     }
 
     function ConvertFile(file) {
+        fileName = file.name;
         if (file.size != 0 && (file.type === 'image/jpeg' || file.type === 'image/jpg')) {
             const reader = new FileReader();
             reader.onload = function(e) {

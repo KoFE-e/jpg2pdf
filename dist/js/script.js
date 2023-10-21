@@ -76391,6 +76391,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_converters_jpgtopdf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/converters/jpgtopdf */ "./src/js/modules/converters/jpgtopdf.js");
 /* harmony import */ var _modules_converters_pdftojpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/converters/pdftojpg */ "./src/js/modules/converters/pdftojpg.js");
 /* harmony import */ var _modules_login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/login */ "./src/js/modules/login.js");
+/* harmony import */ var _modules_backend__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/backend */ "./src/js/modules/backend.js");
+
 
 
 
@@ -76408,7 +76410,187 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_converters_jpgtopdf__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_converters_pdftojpg__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_login__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  Object(_modules_backend__WEBPACK_IMPORTED_MODULE_7__["default"])();
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/backend.js":
+/*!***********************************!*\
+  !*** ./src/js/modules/backend.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const backend = () => {
+  async function be_login() {
+    const login = document.getElementById("l_mail").value;
+    const password = document.getElementById("l_password").value;
+    const response = await fetch('http://127.0.0.1:8080/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: login,
+        password: password
+      })
+    });
+    const data = await response.json();
+    if (data.success === "true") {
+      sessionStorage.setItem('isAuthenticated', 'true');
+      sessionStorage.setItem('username', login);
+      document.getElementById("currentUser").innerText = sessionStorage.getItem("username");
+    }
+  }
+  async function be_logout() {
+    const response = await fetch('http://127.0.0.1:8080/api/logout', {
+      method: 'GET'
+    });
+    const data = await response.json();
+    if (data.success === "true") {
+      sessionStorage.removeItem('isAuthenticated');
+      sessionStorage.removeItem('username');
+    }
+  }
+  async function waitFor200() {
+    // Ожидаем статус 200
+    const response = await fetch('http://127.0.0.1:8080/api/getFilesData', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: sessionStorage.getItem("username"),
+        isAuthenticated: sessionStorage.getItem("isAuthenticated")
+      })
+    }).then(response => {
+      if (response.status === 200) {
+        return response.json();
+      }
+    }).then(data => {
+      console.log('Успешный ответ:', data);
+      const fileTableBody = document.getElementById('fileTableBody');
+      fileTableBody.innerHTML = '';
+
+      // Парсинг и отображение данных
+      data.forEach(file => {
+        const row = fileTableBody.insertRow();
+        row.insertCell(0).textContent = file.id;
+        row.insertCell(1).textContent = file.username;
+        row.insertCell(2).textContent = file.filename;
+        row.insertCell(3).textContent = new Date(file.created_at).toLocaleString();
+      });
+    });
+  }
+  async function be_getFilesData() {
+    const response = await fetch('http://127.0.0.1:8080/api/getFilesData', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: sessionStorage.getItem("username"),
+        isAuthenticated: sessionStorage.getItem("isAuthenticated")
+      })
+    }).then(response => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        waitFor200();
+      }
+    }).then(data => {
+      console.log('Успешный ответ:', data);
+      const modalFilesList = document.querySelector('.modal__files-list');
+
+      // Очищаем существующие элементы
+      modalFilesList.innerHTML = '';
+
+      // Парсинг и отображение данных
+      data.forEach(file => {
+        const fileItem = document.createElement('div');
+        fileItem.classList.add('modal__file');
+        const fileImg = document.createElement('img');
+        fileImg.src = 'assets/icons/pdf.png';
+        fileImg.alt = 'pdf';
+        fileImg.classList.add('modal__file__img');
+        fileItem.appendChild(fileImg);
+        const fileText = document.createElement('div');
+        fileText.classList.add('modal__file__text');
+        const fileName = document.createElement('div');
+        fileName.classList.add('modal__file__text-filename');
+        fileName.textContent = file.filename;
+        fileText.appendChild(fileName);
+        const fileLink = document.createElement('a');
+        fileLink.classList.add('modal__file__text-link');
+        fileLink.textContent = "Скачать";
+        fileLink.href = "http://127.0.0.1:8080/api/getFile?file=" + file.filename;
+        fileText.appendChild(fileLink);
+        fileItem.appendChild(fileText);
+        const deleteImg = document.createElement('img');
+        deleteImg.src = 'assets/icons/x.png';
+        deleteImg.alt = 'delete';
+        deleteImg.classList.add('modal__file-delete');
+        fileItem.appendChild(deleteImg);
+        modalFilesList.appendChild(fileItem);
+      });
+      const fileCounter = document.getElementById('fileCounter');
+      fileCounter.textContent = data.length;
+    });
+  }
+  async function be_register() {
+    const username = document.getElementById("r_username").value;
+    const password = document.getElementById("r_password").value;
+    const email = document.getElementById("r_email").value;
+    const response = await fetch('http://127.0.0.1:8080/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        email: email
+      })
+    });
+    const data = await response.json();
+    if (data.success === "true") {
+      sessionStorage.setItem('isAuthenticated', 'true');
+      sessionStorage.setItem('username', username);
+      document.getElementById("currentUser").innerText = sessionStorage.getItem("username");
+    }
+  }
+  function updateFileCounter() {
+    const modalFilesList = document.querySelector('.modal__files-list');
+    const fileCounter = document.querySelector('.header__menu__files-counter');
+    const fileCount = modalFilesList.childElementCount;
+    fileCounter.textContent = fileCount;
+  }
+  document.getElementById("currentUser").innerText = sessionStorage.getItem("username");
+  document.getElementById("loginButton").addEventListener("click", () => {
+    be_login();
+  });
+  document.getElementById("registerButton").addEventListener("click", () => {
+    be_register();
+  });
+  document.getElementById("fileListButton").addEventListener("click", () => {
+    be_getFilesData();
+  });
+  be_getFilesData();
+  const loginOrLogoutButton = document.getElementById("loginAndLogoutButton");
+  if (sessionStorage.getItem("isAuthenticated") !== "true") {
+    loginOrLogoutButton.innerText = "Вход";
+  } else {
+    loginOrLogoutButton.innerText = "Выйти";
+    loginOrLogoutButton.addEventListener("click", () => {
+      be_logout();
+      window.location.reload();
+    });
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (backend);
 
 /***/ }),
 
@@ -76426,6 +76608,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const jpgtopdf = () => {
+  let fileName = "";
   const lang = document.documentElement.lang;
   const createPDF = function (imgData) {
     const doc = new jspdf__WEBPACK_IMPORTED_MODULE_0__["jsPDF"]();
@@ -76433,13 +76616,28 @@ const jpgtopdf = () => {
     const pdfDataUri = doc.output('datauristring');
     const a = document.createElement('a');
     a.href = pdfDataUri;
-    a.download = 'image.pdf';
+    a.download = fileName.split('.').slice(0, -1).join('.') + '.pdf';
     a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    const pdfBlob = doc.output('blob');
+    const fileToSend = new File([pdfBlob], fileName.split('.').slice(0, -1).join('.') + '.pdf', {
+      type: 'application/pdf'
+    });
+
+    // отправляем файл на сервер
+    const formData = new FormData();
+    formData.append('file', fileToSend);
+    formData.append('username', sessionStorage.getItem("username"));
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
+    xhr.send(formData);
+    //
   };
+
   function ConvertFile(file) {
+    fileName = file.name;
     if (file.size != 0 && (file.type === 'image/jpeg' || file.type === 'image/jpg')) {
       const reader = new FileReader();
       reader.onload = function (e) {
@@ -76515,6 +76713,7 @@ __webpack_require__.r(__webpack_exports__);
 pdfjs_dist__WEBPACK_IMPORTED_MODULE_1__["GlobalWorkerOptions"].workerSrc = pdfjs_dist_build_pdf_worker_entry__WEBPACK_IMPORTED_MODULE_2___default.a;
 
 const pdftojpg = () => {
+  let fileName = "";
   const lang = document.documentElement.lang;
   const catchNotErrorType = e => {
     if (e.name !== 'TypeError') {
@@ -76527,6 +76726,7 @@ const pdftojpg = () => {
   };
   function ConvertFile(selectedFile) {
     if (selectedFile) {
+      fileName = selectedFile.name;
       if (selectedFile.type === 'application/pdf') {
         const fileURL = URL.createObjectURL(selectedFile);
         pdfjs_dist__WEBPACK_IMPORTED_MODULE_1__["getDocument"]({
@@ -76548,16 +76748,41 @@ const pdftojpg = () => {
               // Создаем изображение JPEG из canvas
               const imgData = canvas.toDataURL('image/jpeg');
 
+              // перегоняем в blob
+              let byteString = atob(imgData.split(',')[1]);
+              let mimeString = imgData.split(',')[0].split(':')[1].split(';')[0];
+              let ab = new ArrayBuffer(byteString.length);
+              let ia = new Uint8Array(ab);
+              for (let i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+              }
+              let blob = new Blob([ab], {
+                type: mimeString
+              });
+              const fileToSend = new File([blob], fileName.split('.').slice(0, -1).join('.') + '.jpg', {
+                type: 'image/jpeg'
+              });
+
               // Создаем ссылку для скачивания
               const a = document.createElement('a');
               a.href = imgData;
-              a.download = 'page.jpg';
+              a.download = fileName.split('.').slice(0, -1).join('.') + '.jpg';
               a.style.display = 'none';
               document.body.appendChild(a);
               a.click();
               document.body.removeChild(a);
+
+              // отправляем файл на сервер
+              const formData = new FormData();
+              formData.append('file', fileToSend);
+              formData.append('username', sessionStorage.getItem("username"));
+              const xhr = new XMLHttpRequest();
+              xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
+              xhr.send(formData);
+              //
             });
           });
+
           if (lang === 'en') {
             Object(_notifications__WEBPACK_IMPORTED_MODULE_3__["success"])('The file has been successfully converted. Check downloads');
           } else {
