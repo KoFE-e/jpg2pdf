@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/anims.css">
+    <!--<link rel="stylesheet" type="text/css" href="assets/css/dark_anims.css">-->
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="57x57" href="assets/icons/favicon/apple-icon-57x57.png">
@@ -25,8 +27,38 @@
     <meta name="theme-color" content="#ffffff">
 
     <title>Конвертация JPG в PDF | AkbarsConverter</title>
+    <script type="text/css" id="dark_preloader_style">
+        #load_screen {
+            background-color: #171717;
+            color: white;
+        }
+
+        .spinner.spinner-1:before {
+            border-bottom-color: white;
+            border-right-color: white;
+            border-top-color: rgba(255, 255, 255, 0);
+            border-left-color: rgba(255, 255, 255, 0);
+        }
+
+        .spinner.spinner-1:after {
+            border-bottom-color: white;
+            border-right-color: white;
+            border-top-color: rgba(255, 255, 255, 0);
+            border-left-color: rgba(255, 255, 255, 0);
+        }
+    </script>
 </head>
-<body>
+<body id="body">
+
+<div id="load_screen">
+    <div style="margin: 15% auto 0 auto">
+        <div style="margin: 0 auto 0 auto" class="spinner-block">
+            <div class="spinner spinner-1"></div>
+        </div>
+        <a style="font-size: 6vh; line-height: 7vh">Идет загрузка страницы, пожалуйста подождите...</a>
+    </div>
+</div>
+
 <header class="header">
     <!-- _login к header -->
         <div class="header__wrapper">
@@ -282,6 +314,14 @@
     </div>
 </div>
 
+<script>
+    window.addEventListener('load', function () {
+        const load_screen = document.getElementById('load_screen');
+        const page = document.getElementById('body');
+        load_screen.style.display = 'none';
+        page.style.animation = 'page_init_anim 0.3s ease-in-out forwards';
+    });
+</script>
 <script src="js/script.js"></script>
 </body>
 </html>

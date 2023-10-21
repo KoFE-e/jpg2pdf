@@ -1,0 +1,22 @@
+body {
+    color: white;
+    background: #171717;
+}
+
+#load_screen {
+    background-color: #171717;
+    color: white;
+}
+
+.spinner.spinner-1:before {
+    border-bottom-color: white;
+    border-right-color: white;
+    border-top-color: rgba(255, 255, 255, 0);
+    border-left-color: rgba(255, 255, 255, 0);
+}
+.spinner.spinner-1:after {
+    border-bottom-color: white;
+    border-right-color: white;
+    border-top-color: rgba(255, 255, 255, 0);
+    border-left-color: rgba(255, 255, 255, 0);
+}
