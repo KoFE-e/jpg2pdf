@@ -22,19 +22,24 @@ const theme = () => {
 
     function prevTheme() {
         const theme = localStorage.getItem('theme');
-        switch(theme) {
-            case 'dark':
-                body.classList.add('dark');
-                changeText('Темная', 'Dark');
-                break;
-            case 'light':
-                body.classList.remove('dark');
-                changeText('Светлая', 'Light');
-                break;
-            case 'system':
-                switchSystemTheme();
-                changeText('Система', 'System');
-                break;
+        if (theme) {
+            switch(theme) {
+                case 'dark':
+                    body.classList.add('dark');
+                    changeText('Темная', 'Dark');
+                    break;
+                case 'light':
+                    body.classList.remove('dark');
+                    changeText('Светлая', 'Light');
+                    break;
+                case 'system':
+                    switchSystemTheme();
+                    changeText('Система', 'System');
+                    break;
+            }
+        } else {
+            localStorage.setItem('theme', 'system');
+            switchSystemTheme();
         }
     }
     prevTheme();
