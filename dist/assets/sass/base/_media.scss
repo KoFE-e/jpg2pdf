@@ -1,4 +1,7 @@
 @media (max-width: 1699.98px) {
+    .error {
+        font-size: 14px;
+    }
     .header {
         &__menu {
             min-width: 500px;
@@ -212,6 +215,12 @@
 }
 
 @media (max-width: 1199.98px) {
+    .errors {
+        padding: 5px;
+    }
+    .error {
+        font-size: 12px;
+    }
     .header {
         padding: 15px 30px;
         height: 90px;
@@ -431,6 +440,15 @@
 }
 
 @media (max-width: 991.98px) {
+    .errors {
+        top: 75%;
+        left: 60%;
+        transform: none;
+        border-radius: 10px;
+    }
+    .error {
+        font-size: 10px;
+    }
     .header {
         padding: 15px 20px;
         height: 80px;

@@ -6,6 +6,7 @@ import jpgtopdf from "./modules/converters/jpgtopdf";
 import pdftojpg from "./modules/converters/pdftojpg";
 import backend from "./modules/backend";
 import load from "./modules/load";
+import forms from "./modules/forms";
 
 load();
 
@@ -19,4 +20,5 @@ window.addEventListener('DOMContentLoaded', () => {
     jpgtopdf();
     pdftojpg();
     backend();
+    forms();
 });

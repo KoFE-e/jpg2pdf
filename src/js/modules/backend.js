@@ -1,5 +1,9 @@
+import Validator from "./validator";
+
 const backend = () => {
     const header = document.querySelector('.header');
+    const validatorLogin = new Validator('#loginForm', '#loginForm .modal__form__input', '#loginForm .modal__form__input_mail', '#loginForm .modal__form__input_password'),
+        validatorRegister = new Validator('#registerForm', '#registerForm .modal__form__input', '#registerForm .modal__form__input_mail', '#registerForm .modal__form__input_password', '#registerForm .modal__form__input_confirm');
 
     async function be_login() {
         const login = document.getElementById("l_mail").value;
@@ -174,12 +178,21 @@ const backend = () => {
 
     document.getElementById("currentUser").innerText = sessionStorage.getItem("username")
 
-    document.getElementById("loginButton").addEventListener("click", () => {
-        be_login();
+    document.getElementById("loginForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        validatorLogin.showErrors();
+        if (!document.getElementById("loginForm").querySelector('.error')) {
+            be_login();
+        }
+        
     })
 
-    document.getElementById("registerButton").addEventListener("click", () => {
-        be_register();
+    document.getElementById("registerForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        validatorRegister.showErrors();
+        if (!document.getElementById("registerForm").querySelector('.error')) {
+            be_register();
+        }
     })
 
     document.getElementById("fileListButton").addEventListener("click", () => {
@@ -190,11 +203,19 @@ const backend = () => {
 
     const loginOrLogoutButton = document.getElementById("loginAndLogoutButton");
     if (sessionStorage.getItem("isAuthenticated") !== "true") {
-        loginOrLogoutButton.innerText = "Вход";
+        if (document.documentElement.lang === 'ru') {
+            loginOrLogoutButton.innerText = "Вход";
+        } else {
+            loginOrLogoutButton.innerText = "Sign in";
+        }
     }
     else {
         header.classList.add('header_login');
-        loginOrLogoutButton.innerText = "Выйти";
+        if (document.documentElement.lang === 'ru') {
+            loginOrLogoutButton.innerText = "Выйти";
+        } else {
+            loginOrLogoutButton.innerText = "Sign out";
+        }
         loginOrLogoutButton.addEventListener("click", () => {
             be_logout();
         })
