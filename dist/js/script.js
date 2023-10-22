@@ -76587,10 +76587,10 @@ const backend = () => {
   if (sessionStorage.getItem("isAuthenticated") !== "true") {
     loginOrLogoutButton.innerText = "Вход";
   } else {
+    header.classList.add('header_login');
     loginOrLogoutButton.innerText = "Выйти";
     loginOrLogoutButton.addEventListener("click", () => {
       be_logout();
-      window.location.reload();
     });
   }
 };
@@ -77045,7 +77045,7 @@ const theme = () => {
     triggerText = trigger.querySelector('span'),
     body = document.body,
     lang = document.documentElement.lang;
-  let curTheme = localStorage.getItem('theme');
+  let curTheme = sessionStorage.getItem('theme');
   function isSystemDark() {
     const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
     return darkThemeMq.matches;
@@ -77058,7 +77058,7 @@ const theme = () => {
     }
   }
   function prevTheme() {
-    const theme = localStorage.getItem('theme');
+    const theme = sessionStorage.getItem('theme');
     if (theme) {
       switch (theme) {
         case 'dark':
@@ -77075,7 +77075,7 @@ const theme = () => {
           break;
       }
     } else {
-      localStorage.setItem('theme', 'system');
+      sessionStorage.setItem('theme', 'system');
       switchSystemTheme();
     }
   }
@@ -77090,19 +77090,19 @@ const theme = () => {
   trigger.addEventListener('click', () => {
     if (curTheme === 'system') {
       curTheme = 'light';
-      localStorage.setItem('theme', 'light');
+      sessionStorage.setItem('theme', 'light');
       changeText('Светлая', 'Light');
       body.classList.remove('dark');
       trigger.setAttribute('data-theme', 'light');
     } else if (curTheme === 'light') {
       curTheme = 'dark';
-      localStorage.setItem('theme', 'dark');
+      sessionStorage.setItem('theme', 'dark');
       changeText('Темная', 'Dark');
       body.classList.add('dark');
       trigger.setAttribute('data-theme', 'dark');
     } else if (curTheme === 'dark') {
       curTheme = 'system';
-      localStorage.setItem('theme', 'system');
+      sessionStorage.setItem('theme', 'system');
       changeText('Система', 'System');
       switchSystemTheme();
       trigger.setAttribute('data-theme', 'system');
