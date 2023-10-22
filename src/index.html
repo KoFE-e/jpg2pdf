@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.min.css">
-    <link rel="stylesheet" href="" id="loaderTheme">
-    <script>
-        const link = document.querySelector("#loaderTheme"),
-              theme = localStorage.getItem('theme');
-        if (theme === 'dark' || theme === 'system' && window.matchMedia("(prefers-color-scheme: dark)")) {
-            link.setAttribute("href", "assets/css/dark_anims.css");
-        } else {
-            link.setAttribute("href", "");
+
+    <script type="text/css" id="darkPreloaderStyle">
+        #load_screen {
+        background-color: #262626;
+        color: white;
+        }
+
+        .spinner.spinner-1:before {
+        border-bottom-color: white;
+        border-right-color: white;
+        border-top-color: rgba(255, 255, 255, 0);
+        border-left-color: rgba(255, 255, 255, 0);
+        }
+
+        .spinner.spinner-1:after {
+        border-bottom-color: white;
+        border-right-color: white;
+        border-top-color: rgba(255, 255, 255, 0);
+        border-left-color: rgba(255, 255, 255, 0);
         }
     </script>
 
@@ -37,6 +48,25 @@
     <title>Конвертация JPG в PDF | AkbarsConverter</title>
 </head>
 <body id="body">
+
+<script>
+    const currentDate = new Date();
+    if (((currentDate.getHours() >= 19 || currentDate.getHours() < 7) && (sessionStorage.getItem("theme") === "system" || sessionStorage.getItem("theme") === null)) || sessionStorage.getItem('theme') === "dark") {
+        const style_script_block = document.getElementById("darkPreloaderStyle");
+        const style_block = document.createElement("style");
+        style_block.innerHTML = style_script_block.innerHTML;
+
+        for (let i = 0; i < style_script_block.attributes.length; i++) {
+            let attr = style_script_block.attributes[i];
+            style_block.setAttribute(attr.name, attr.value);
+        }
+        style_script_block.parentNode.replaceChild(style_block, style_script_block);
+        sessionStorage.setItem("theme", "dark");
+    }
+    else if (sessionStorage.getItem("theme") !== "dark") {
+        sessionStorage.setItem("theme", "light")
+    }
+</script>
 
 <div id="load_screen">
     <div style="margin: 15% auto 0 auto">

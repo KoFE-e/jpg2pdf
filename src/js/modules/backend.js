@@ -193,10 +193,10 @@ const backend = () => {
         loginOrLogoutButton.innerText = "Вход";
     }
     else {
+        header.classList.add('header_login');
         loginOrLogoutButton.innerText = "Выйти";
         loginOrLogoutButton.addEventListener("click", () => {
             be_logout();
-            window.location.reload();
         })
     }
 }
