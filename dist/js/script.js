@@ -76392,6 +76392,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_converters_pdftojpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/converters/pdftojpg */ "./src/js/modules/converters/pdftojpg.js");
 /* harmony import */ var _modules_backend__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/backend */ "./src/js/modules/backend.js");
 /* harmony import */ var _modules_load__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/load */ "./src/js/modules/load.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+
 
 
 
@@ -76411,6 +76413,7 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_converters_jpgtopdf__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_converters_pdftojpg__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_backend__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_8__["default"])();
 });
 
 /***/ }),
@@ -76424,8 +76427,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./validator */ "./src/js/modules/validator.js");
+
 const backend = () => {
   const header = document.querySelector('.header');
+  const validatorLogin = new _validator__WEBPACK_IMPORTED_MODULE_0__["default"]('#loginForm', '#loginForm .modal__form__input', '#loginForm .modal__form__input_mail', '#loginForm .modal__form__input_password'),
+    validatorRegister = new _validator__WEBPACK_IMPORTED_MODULE_0__["default"]('#registerForm', '#registerForm .modal__form__input', '#registerForm .modal__form__input_mail', '#registerForm .modal__form__input_password', '#registerForm .modal__form__input_confirm');
   async function be_login() {
     const login = document.getElementById("l_mail").value;
     const password = document.getElementById("l_password").value;
@@ -76573,11 +76580,19 @@ const backend = () => {
     fileCounter.textContent = fileCount;
   }
   document.getElementById("currentUser").innerText = sessionStorage.getItem("username");
-  document.getElementById("loginButton").addEventListener("click", () => {
-    be_login();
+  document.getElementById("loginForm").addEventListener("submit", e => {
+    e.preventDefault();
+    validatorLogin.showErrors();
+    if (!document.getElementById("loginForm").querySelector('.error')) {
+      be_login();
+    }
   });
-  document.getElementById("registerButton").addEventListener("click", () => {
-    be_register();
+  document.getElementById("registerForm").addEventListener("submit", e => {
+    e.preventDefault();
+    validatorRegister.showErrors();
+    if (!document.getElementById("registerForm").querySelector('.error')) {
+      be_register();
+    }
   });
   document.getElementById("fileListButton").addEventListener("click", () => {
     be_getFilesData();
@@ -76585,10 +76600,18 @@ const backend = () => {
   be_getFilesData();
   const loginOrLogoutButton = document.getElementById("loginAndLogoutButton");
   if (sessionStorage.getItem("isAuthenticated") !== "true") {
-    loginOrLogoutButton.innerText = "Вход";
+    if (document.documentElement.lang === 'ru') {
+      loginOrLogoutButton.innerText = "Вход";
+    } else {
+      loginOrLogoutButton.innerText = "Sign in";
+    }
   } else {
     header.classList.add('header_login');
-    loginOrLogoutButton.innerText = "Выйти";
+    if (document.documentElement.lang === 'ru') {
+      loginOrLogoutButton.innerText = "Выйти";
+    } else {
+      loginOrLogoutButton.innerText = "Sign out";
+    }
     loginOrLogoutButton.addEventListener("click", () => {
       be_logout();
     });
@@ -76863,6 +76886,88 @@ const drag = () => {
 
 /***/ }),
 
+/***/ "./src/js/modules/forms.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/forms.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./validator */ "./src/js/modules/validator.js");
+
+const forms = () => {
+  const validatorLogin = new _validator__WEBPACK_IMPORTED_MODULE_0__["default"]('#loginForm', '#loginForm .modal__form__input', '#loginForm .modal__form__input_mail', '#loginForm .modal__form__input_password'),
+    validatorRegister = new _validator__WEBPACK_IMPORTED_MODULE_0__["default"]('#registerForm', '#registerForm .modal__form__input', '#registerForm .modal__form__input_mail', '#registerForm .modal__form__input_password', '#registerForm .modal__form__input_confirm');
+  const formLogin = document.querySelector('#loginForm'),
+    formRegister = document.querySelector('#registerForm'),
+    inputsLogin = document.querySelectorAll('#loginForm .modal__form__input'),
+    inputsRegister = document.querySelectorAll('#registerForm .modal__form__input');
+  function bindValidator(form, inputs, validator) {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      validator.showErrors();
+    });
+    inputs.forEach(item => {
+      if (item.name == 'password' || item.name == 'confirm' || item.name == 'mail') {
+        item.addEventListener('keypress', function (e) {
+          if (e.key.match(/[а-яА-Я ]/ig)) {
+            e.preventDefault();
+          }
+        });
+      }
+      item.addEventListener('input', () => {
+        validator.showErrors();
+      });
+    });
+  }
+  bindValidator(formLogin, inputsLogin, validatorLogin);
+  bindValidator(formRegister, inputsRegister, validatorRegister);
+  function changeIndicator(value) {
+    const passwordDiffBlock = document.querySelector('.modal__form__password-difficult'),
+      passwordDiffIndic = passwordDiffBlock.querySelector('.modal__form__password-difficult-indicator span'),
+      passwordDiffText = passwordDiffBlock.querySelector('.modal__form__password-difficult-text');
+    const hasLowLetters = value.match(/[a-z]/),
+      hasHighLetters = value.match(/[A-Z]/),
+      hasNumbers = value.match(/[0-9]/),
+      hasNonWords = value.match(/\W/);
+    if (hasLowLetters && hasHighLetters && hasNumbers && hasNonWords && value.length >= 10) {
+      passwordDiffIndic.style.width = '100%';
+      passwordDiffIndic.style.backgroundColor = '#48ff45';
+      passwordDiffIndic.style.borderRadius = '6px';
+      passwordDiffText.innerHTML = 'Отличный пароль';
+    } else if ((hasLowLetters && hasHighLetters && hasNumbers || hasLowLetters && hasHighLetters && hasNonWords) && value.length >= 7) {
+      passwordDiffIndic.style.width = '75%';
+      passwordDiffIndic.style.backgroundColor = '#b3ff6d';
+      passwordDiffIndic.style.borderRadius = '6px 0 0 6px';
+      passwordDiffText.innerHTML = 'Сложный пароль';
+    } else if ((hasLowLetters && hasHighLetters || hasLowLetters && hasNumbers || hasLowLetters && hasNonWords || hasHighLetters && hasNumbers || hasHighLetters && hasNonWords || hasNumbers && hasNonWords) && value.length >= 5) {
+      passwordDiffIndic.style.width = '50%';
+      passwordDiffIndic.style.backgroundColor = '';
+      passwordDiffIndic.style.borderRadius = '6px 0 0 6px';
+      passwordDiffText.innerHTML = 'Ты можешь еще лучше!';
+    } else if (hasLowLetters || hasHighLetters || hasNonWords || hasNumbers) {
+      passwordDiffIndic.style.width = '25%';
+      passwordDiffIndic.style.backgroundColor = '#ff5f5f';
+      passwordDiffIndic.style.borderRadius = '6px 0 0 6px';
+      passwordDiffText.innerHTML = 'Слабый пароль';
+    } else {
+      passwordDiffIndic.style.width = '0%';
+      passwordDiffIndic.style.backgroundColor = '';
+      passwordDiffIndic.style.borderRadius = '6px 0 0 6px';
+      passwordDiffText.innerHTML = 'Начните вводить пароль';
+    }
+  }
+  const password = document.querySelector('.modal_register .modal__form__input_password');
+  password.addEventListener('input', () => {
+    changeIndicator(password.value);
+  });
+};
+/* harmony default export */ __webpack_exports__["default"] = (forms);
+
+/***/ }),
+
 /***/ "./src/js/modules/hamburger.js":
 /*!*************************************!*\
   !*** ./src/js/modules/hamburger.js ***!
@@ -76934,11 +77039,15 @@ const modal = () => {
   function bindModal(triggerSelector, modalSelector) {
     const trigger = document.querySelectorAll(triggerSelector),
       modal = document.querySelector(modalSelector),
-      windows = document.querySelectorAll('[data-modal]');
+      windows = document.querySelectorAll('[data-modal]'),
+      errors = document.querySelectorAll('.errors');
     function closeAllModals() {
       document.body.style.overflow = '';
       windows.forEach(item => {
         item.classList.remove('modal_active');
+      });
+      errors.forEach(item => {
+        item.classList.remove('errors_active');
       });
     }
     function openModal() {
@@ -77110,6 +77219,122 @@ const theme = () => {
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (theme);
+
+/***/ }),
+
+/***/ "./src/js/modules/validator.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/validator.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+class Validator {
+  constructor(formSelector, fieldsSelector, emailSelector, passwordSelector) {
+    let confirmPasswordSelector = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+    this.form = document.querySelector(formSelector);
+    this.fields = document.querySelectorAll(fieldsSelector);
+    this.email = document.querySelector(emailSelector);
+    this.password = document.querySelector(passwordSelector);
+    if (confirmPasswordSelector != '') {
+      this.confirmPassword = document.querySelector(confirmPasswordSelector);
+    }
+  }
+  checkLang() {
+    return document.documentElement.lang;
+  }
+  clearErrors(form) {
+    const errors = form.querySelectorAll('.error');
+    errors.forEach(item => {
+      item.remove();
+    });
+  }
+  createError(message) {
+    const error = document.createElement('span');
+    error.classList.add('error');
+    error.textContent = message;
+    return error;
+  }
+  validateEmpty(field) {
+    return field.value == '';
+  }
+  validateLength(field) {
+    return field.value.length < 2;
+  }
+  validateEmail(email) {
+    return email.value.match('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$');
+  }
+  validatePassword(password, confirmPassword) {
+    return password.value == confirmPassword.value;
+  }
+  checkEmpty(fields) {
+    fields.forEach(item => {
+      if (this.validateEmpty(item)) {
+        let error;
+        if (this.checkLang() === 'ru') {
+          error = this.createError("Поле не должно быть пустым");
+        } else {
+          error = this.createError("The field must not be empty");
+        }
+        item.parentElement.querySelector('.errors').appendChild(error);
+      }
+    });
+  }
+  minLength(fields) {
+    fields.forEach(item => {
+      if (this.validateLength(item)) {
+        let error;
+        if (this.checkLang() === 'ru') {
+          error = this.createError("Длина должна быть не менее 2 символов");
+        } else {
+          error = this.createError("The length must be at least 2 characters");
+        }
+        item.parentElement.querySelector('.errors').appendChild(error);
+      }
+    });
+  }
+  checkEmail(email) {
+    if (!this.validateEmail(email)) {
+      let error;
+      if (this.checkLang() === 'ru') {
+        error = this.createError("Введите адрес почты");
+      } else {
+        error = this.createError("Enter the mail address");
+      }
+      email.parentElement.querySelector('.errors').appendChild(error);
+    }
+  }
+  checkPassword(password, confirmPassword) {
+    if (!this.validatePassword(password, confirmPassword)) {
+      let error;
+      if (this.checkLang() === 'ru') {
+        error = this.createError("Пароли не совпадают");
+      } else {
+        error = this.createError("The passwords don't match");
+      }
+      confirmPassword.parentElement.querySelector('.errors').appendChild(error);
+    }
+  }
+  showErrors() {
+    this.clearErrors(this.form);
+    this.checkEmpty(this.fields);
+    this.minLength(this.fields);
+    this.checkEmail(this.email);
+    if (this.confirmPassword) {
+      this.checkPassword(this.password, this.confirmPassword);
+    }
+    this.fields.forEach(item => {
+      if (item.parentElement.querySelector('.error')) {
+        item.parentElement.querySelector('.errors').classList.add('errors_active');
+      } else {
+        item.parentElement.querySelector('.errors').classList.remove('errors_active');
+      }
+    });
+  }
+}
+/* harmony default export */ __webpack_exports__["default"] = (Validator);
 
 /***/ }),
 

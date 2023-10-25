@@ -3,12 +3,16 @@ const modal = () => {
     function bindModal(triggerSelector, modalSelector) {
         const trigger = document.querySelectorAll(triggerSelector),
               modal = document.querySelector(modalSelector),
-              windows = document.querySelectorAll('[data-modal]');
+              windows = document.querySelectorAll('[data-modal]'),
+              errors = document.querySelectorAll('.errors');
 
         function closeAllModals() {
             document.body.style.overflow = '';
             windows.forEach(item => {
                 item.classList.remove('modal_active');
+            });
+            errors.forEach(item => {
+                item.classList.remove('errors_active');
             });
         }
 

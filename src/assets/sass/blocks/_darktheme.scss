@@ -1,4 +1,10 @@
 body.dark {
+    .errors {
+        background-color: #3e3e3e;
+    }
+    .error {
+        color: #ff3535;
+    }
     .header {
         background-color: #282828;
         box-shadow: 0px 0px 90px 0px rgba(255,255,255,0.09);
