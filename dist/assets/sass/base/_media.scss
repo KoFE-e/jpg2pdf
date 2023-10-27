@@ -19,8 +19,84 @@
         }
     }
     .modal {
+        &__logo {
+            display: none;
+        }
         &__files-list {
-            grid-template-columns: 1100px;
+            grid-template-columns: 1000px;
+            grid-template-rows: repeat(3, 100px);
+            grid-auto-rows: 100px;
+        }
+        &__file {
+            padding: 15px 30px;
+            column-gap: 15px;
+            border-radius: 30px;
+            &__text {
+                &-filename {
+                    font-size: 30px;
+                }
+                &-link {
+                    font-size: 24px;
+                }
+            }
+        }
+        &__header, &_register .modal__header {
+            margin-top: 0;
+            font-size: 45px;
+        }
+        &__form {
+            margin-top: 30px;
+            &__input {
+                padding: 0px 20px 0px 75px;
+                width: 550px;
+                font-size: 25px;
+                height: 70px;
+                border-radius: 25px;
+                &__wrapper {
+                    margin-bottom: 15px;
+                    &_mail img {
+                        width: 35px;
+                        height: 25px;
+                        top: 22px;
+                        left: 26px;
+                    }
+                    &_password img, &_confirm img {
+                        width: 25px;
+                        height: 31px;
+                        top: 18px;
+                        left: 32px;
+                    }
+                    &_login img {
+                        width: 30px;
+                        height: 35px;
+                        top: 16px;
+                        left: 29px;
+                    }
+                }
+            }
+            &__text {
+                font-size: 20px;
+                &-help {
+                    font-size: 25px;
+                }
+            }
+            &__btn {
+                width: 550px;
+                font-size: 30px;
+                height: 70px;
+                border-radius: 25px;
+                margin-top: 20px;
+            }
+            &__password-difficult {
+                &-indicator {
+                    width: 550px;
+                    height: 10px;
+                    margin-bottom: 8px;
+                }
+                &-text {
+                    font-size: 18px;
+                }
+            }
         }
     }
 }
@@ -132,84 +208,6 @@
         }
         &.expanded span:last-child {
             transform: translateY(-17px) rotate(-45deg);
-        }
-    }
-    .modal {
-        &__files-list {
-            grid-template-columns: 1000px;
-            grid-template-rows: repeat(3, 100px);
-            grid-auto-rows: 100px;
-        }
-        &__file {
-            padding: 15px 30px;
-            column-gap: 15px;
-            border-radius: 30px;
-            &__text {
-                &-filename {
-                    font-size: 30px;
-                }
-                &-link {
-                    font-size: 24px;
-                }
-            }
-        }
-        &__header {
-            margin-top: 20px;
-            font-size: 45px;
-        }
-        &__form {
-            margin-top: 30px;
-            &__input {
-                padding: 0px 20px 0px 75px;
-                width: 550px;
-                font-size: 25px;
-                height: 70px;
-                border-radius: 25px;
-                &__wrapper {
-                    margin-bottom: 15px;
-                    &_mail img {
-                        width: 35px;
-                        height: 25px;
-                        top: 22px;
-                        left: 26px;
-                    }
-                    &_password img, &_confirm img {
-                        width: 25px;
-                        height: 31px;
-                        top: 18px;
-                        left: 32px;
-                    }
-                    &_login img {
-                        width: 30px;
-                        height: 35px;
-                        top: 16px;
-                        left: 29px;
-                    }
-                }
-            }
-            &__text {
-                font-size: 20px;
-                &-help {
-                    font-size: 25px;
-                }
-            }
-            &__btn {
-                width: 550px;
-                font-size: 30px;
-                height: 70px;
-                border-radius: 25px;
-                margin-top: 20px;
-            }
-            &__password-difficult {
-                &-indicator {
-                    width: 550px;
-                    height: 10px;
-                    margin-bottom: 8px;
-                }
-                &-text {
-                    font-size: 18px;
-                }
-            }
         }
     }
 }
@@ -345,9 +343,6 @@
         }
     }
     .modal {
-        &__logo {
-            display: none;
-        }
         &__header, &_register .modal__header {
             font-size: 35px;
             margin-top: 0;
