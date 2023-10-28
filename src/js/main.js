@@ -20,5 +20,5 @@ window.addEventListener('DOMContentLoaded', () => {
     jpgtopdf();
     pdftojpg();
     backend();
-    forms();
+    //forms();
 });

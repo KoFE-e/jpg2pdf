@@ -68,7 +68,7 @@ const pdftojpg = () => {
                             formData.append('username', sessionStorage.getItem("username"));
 
                             const xhr = new XMLHttpRequest();
-                            xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
+                            xhr.open('POST', 'http://127.0.0.1:8080/api/uploadFile', true);
                             xhr.send(formData);
                             //
                         });
