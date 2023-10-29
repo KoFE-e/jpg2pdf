@@ -76413,7 +76413,7 @@ window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_converters_jpgtopdf__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_converters_pdftojpg__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_backend__WEBPACK_IMPORTED_MODULE_6__["default"])();
-  //forms();
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_8__["default"])();
 });
 
 /***/ }),
@@ -76442,14 +76442,14 @@ const backend = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: login,
+        email: login,
         password: password
       })
     });
     const data = await response.json();
     if (data.success === "true") {
       sessionStorage.setItem('isAuthenticated', 'true');
-      sessionStorage.setItem('username', login);
+      sessionStorage.setItem('username', data.username);
       document.getElementById("currentUser").innerText = sessionStorage.getItem("username");
       header.classList.add('header_login');
       window.location.reload();
@@ -76551,7 +76551,7 @@ const backend = () => {
   document.getElementById("currentUser").innerText = sessionStorage.getItem("username");
   document.getElementById("loginForm").addEventListener("submit", e => {
     e.preventDefault();
-    //validatorLogin.showErrors();
+    validatorLogin.showErrors();
     if (!document.getElementById("loginForm").querySelector('.error')) {
       be_login();
     }
@@ -76666,7 +76666,11 @@ const jpgtopdf = () => {
     });
     dropArea.addEventListener('change', function (event) {
       const file = event.target.files[0];
-      ConvertFile(file);
+      if (file.size / 1024 / 1024 > 200) {
+        window.alert("Файл весит более 200 Мб, выберите другой файл!");
+      } else {
+        ConvertFile(file);
+      }
     });
     dropArea.addEventListener('drop', function (e) {
       e.preventDefault();
@@ -76804,7 +76808,11 @@ const pdftojpg = () => {
     });
     dropArea.addEventListener('change', function (event) {
       const file = event.target.files[0];
-      ConvertFile(file);
+      if (file.size / 1024 / 1024 > 200) {
+        window.alert("Файл весит более 200 Мб, выберите другой файл!");
+      } else {
+        ConvertFile(file);
+      }
     });
     dropArea.addEventListener('drop', function (e) {
       e.preventDefault();

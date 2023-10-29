@@ -69,7 +69,12 @@ const jpgtopdf = () => {
         dropArea.addEventListener('change', function(event) {
             const file = event.target.files[0];
 
-            ConvertFile(file)
+            if (file.size / 1024 / 1024 > 200) {
+                window.alert("Файл весит более 200 Мб, выберите другой файл!")
+            }
+            else {
+                ConvertFile(file)
+            }
         });
 
         dropArea.addEventListener('drop', function(e) {

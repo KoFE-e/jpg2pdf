@@ -14,14 +14,14 @@ const backend = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({username: login, password: password}),
+            body: JSON.stringify({email: login, password: password}),
         });
 
         const data = await response.json();
 
         if (data.success === "true") {
             sessionStorage.setItem('isAuthenticated', 'true');
-            sessionStorage.setItem('username', login);
+            sessionStorage.setItem('username', data.username);
 
             document.getElementById("currentUser").innerText = sessionStorage.getItem("username")
             header.classList.add('header_login');
@@ -145,7 +145,7 @@ const backend = () => {
 
     document.getElementById("loginForm").addEventListener("submit", (e) => {
         e.preventDefault();
-        //validatorLogin.showErrors();
+        validatorLogin.showErrors();
         if (!document.getElementById("loginForm").querySelector('.error')) {
             be_login();
         }
