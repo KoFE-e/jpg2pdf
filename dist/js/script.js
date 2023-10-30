@@ -76442,16 +76442,17 @@ const backend = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: login,
+        email: login,
         password: password
       })
     });
     const data = await response.json();
     if (data.success === "true") {
       sessionStorage.setItem('isAuthenticated', 'true');
-      sessionStorage.setItem('username', login);
+      sessionStorage.setItem('username', data.username);
       document.getElementById("currentUser").innerText = sessionStorage.getItem("username");
       header.classList.add('header_login');
+      window.location.reload();
     }
   }
   async function be_logout() {
@@ -76463,37 +76464,8 @@ const backend = () => {
       sessionStorage.removeItem('isAuthenticated');
       sessionStorage.removeItem('username');
       header.classList.remove('header_login');
+      window.location.reload();
     }
-  }
-  async function waitFor200() {
-    // Ожидаем статус 200
-    const response = await fetch('http://127.0.0.1:8080/api/getFilesData', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: sessionStorage.getItem("username"),
-        isAuthenticated: sessionStorage.getItem("isAuthenticated")
-      })
-    }).then(response => {
-      if (response.status === 200) {
-        return response.json();
-      }
-    }).then(data => {
-      console.log('Успешный ответ:', data);
-      const fileTableBody = document.getElementById('fileTableBody');
-      fileTableBody.innerHTML = '';
-
-      // Парсинг и отображение данных
-      data.forEach(file => {
-        const row = fileTableBody.insertRow();
-        row.insertCell(0).textContent = file.id;
-        row.insertCell(1).textContent = file.username;
-        row.insertCell(2).textContent = file.filename;
-        row.insertCell(3).textContent = new Date(file.created_at).toLocaleString();
-      });
-    });
   }
   async function be_getFilesData() {
     const response = await fetch('http://127.0.0.1:8080/api/getFilesData', {
@@ -76509,7 +76481,7 @@ const backend = () => {
       if (response.status === 200) {
         return response.json();
       } else {
-        waitFor200();
+        //waitFor200();
       }
     }).then(data => {
       console.log('Успешный ответ:', data);
@@ -76536,18 +76508,14 @@ const backend = () => {
         const fileLink = document.createElement('a');
         fileLink.classList.add('modal__file__text-link');
         fileLink.textContent = "Скачать";
-        fileLink.href = "http://127.0.0.1:8080/api/getFile?file=" + file.filename;
+        //fileLink.addEventListener("click", be_getFile(file.id));
+        fileLink.href = "http://127.0.0.1:8080/api/getFile?id=" + file.id;
+        const fileCounter = document.getElementById('fileCounter');
+        fileCounter.textContent = data.length;
         fileText.appendChild(fileLink);
         fileItem.appendChild(fileText);
-        const deleteImg = document.createElement('img');
-        deleteImg.src = 'assets/icons/x.png';
-        deleteImg.alt = 'delete';
-        deleteImg.classList.add('modal__file-delete');
-        fileItem.appendChild(deleteImg);
         modalFilesList.appendChild(fileItem);
       });
-      const fileCounter = document.getElementById('fileCounter');
-      fileCounter.textContent = data.length;
     });
   }
   async function be_register() {
@@ -76571,6 +76539,7 @@ const backend = () => {
       sessionStorage.setItem('username', username);
       document.getElementById("currentUser").innerText = sessionStorage.getItem("username");
       header.classList.add('header_login');
+      window.location.reload();
     }
   }
   function updateFileCounter() {
@@ -76658,7 +76627,7 @@ const jpgtopdf = () => {
     formData.append('file', fileToSend);
     formData.append('username', sessionStorage.getItem("username"));
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
+    xhr.open('POST', 'http://127.0.0.1:8080/api/uploadFile', true);
     xhr.send(formData);
     //
   };
@@ -76697,7 +76666,11 @@ const jpgtopdf = () => {
     });
     dropArea.addEventListener('change', function (event) {
       const file = event.target.files[0];
-      ConvertFile(file);
+      if (file.size / 1024 / 1024 > 200) {
+        window.alert("Файл весит более 200 Мб, выберите другой файл!");
+      } else {
+        ConvertFile(file);
+      }
     });
     dropArea.addEventListener('drop', function (e) {
       e.preventDefault();
@@ -76804,7 +76777,7 @@ const pdftojpg = () => {
               formData.append('file', fileToSend);
               formData.append('username', sessionStorage.getItem("username"));
               const xhr = new XMLHttpRequest();
-              xhr.open('POST', 'http://127.0.0.1:8080/api/upload-file', true);
+              xhr.open('POST', 'http://127.0.0.1:8080/api/uploadFile', true);
               xhr.send(formData);
               //
             });
@@ -76835,7 +76808,11 @@ const pdftojpg = () => {
     });
     dropArea.addEventListener('change', function (event) {
       const file = event.target.files[0];
-      ConvertFile(file);
+      if (file.size / 1024 / 1024 > 200) {
+        window.alert("Файл весит более 200 Мб, выберите другой файл!");
+      } else {
+        ConvertFile(file);
+      }
     });
     dropArea.addEventListener('drop', function (e) {
       e.preventDefault();

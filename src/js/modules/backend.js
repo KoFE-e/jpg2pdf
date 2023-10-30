@@ -14,17 +14,18 @@ const backend = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({username: login, password: password}),
+            body: JSON.stringify({email: login, password: password}),
         });
 
         const data = await response.json();
 
         if (data.success === "true") {
             sessionStorage.setItem('isAuthenticated', 'true');
-            sessionStorage.setItem('username', login);
+            sessionStorage.setItem('username', data.username);
 
             document.getElementById("currentUser").innerText = sessionStorage.getItem("username")
             header.classList.add('header_login');
+            window.location.reload()
         }
     }
 
@@ -39,41 +40,8 @@ const backend = () => {
             sessionStorage.removeItem('isAuthenticated');
             sessionStorage.removeItem('username');
             header.classList.remove('header_login');
+            window.location.reload()
         }
-    }
-
-    async function waitFor200() {
-        // Ожидаем статус 200
-        const response = await fetch('http://127.0.0.1:8080/api/getFilesData', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: sessionStorage.getItem("username"),
-                isAuthenticated: sessionStorage.getItem("isAuthenticated")
-            }),
-        })
-            .then(response => {
-                if (response.status === 200) {
-                    return response.json();
-                }
-            })
-            .then(data => {
-                console.log('Успешный ответ:', data);
-
-                const fileTableBody = document.getElementById('fileTableBody');
-                fileTableBody.innerHTML = '';
-
-                // Парсинг и отображение данных
-                data.forEach(file => {
-                    const row = fileTableBody.insertRow();
-                    row.insertCell(0).textContent = file.id;
-                    row.insertCell(1).textContent = file.username;
-                    row.insertCell(2).textContent = file.filename;
-                    row.insertCell(3).textContent = new Date(file.created_at).toLocaleString();
-                });
-            });
     }
 
     async function be_getFilesData() {
@@ -91,7 +59,7 @@ const backend = () => {
                 if (response.status === 200) {
                     return response.json();
                 } else {
-                    waitFor200();
+                    //waitFor200();
                 }
             })
             .then(data => {
@@ -124,24 +92,20 @@ const backend = () => {
                     const fileLink = document.createElement('a');
                     fileLink.classList.add('modal__file__text-link');
                     fileLink.textContent = "Скачать";
-                    fileLink.href = "http://127.0.0.1:8080/api/getFile?file=" + file.filename;
-                    fileText.appendChild(fileLink);
+                    //fileLink.addEventListener("click", be_getFile(file.id));
+                    fileLink.href = "http://127.0.0.1:8080/api/getFile?id=" + file.id;
 
-                    fileItem.appendChild(fileText);
+                    const fileCounter = document.getElementById('fileCounter');
+                    fileCounter.textContent = data.length;
 
-                    const deleteImg = document.createElement('img');
-                    deleteImg.src = 'assets/icons/x.png';
-                    deleteImg.alt = 'delete';
-                    deleteImg.classList.add('modal__file-delete');
-                    fileItem.appendChild(deleteImg);
+                    fileText.appendChild(fileLink)
+                    fileItem.appendChild(fileText)
 
-                    modalFilesList.appendChild(fileItem);
+                    modalFilesList.appendChild(fileItem)
                 });
-
-                const fileCounter = document.getElementById('fileCounter');
-                fileCounter.textContent = data.length;
             });
     }
+
 
     async function be_register() {
         const username = document.getElementById("r_username").value;
@@ -164,6 +128,7 @@ const backend = () => {
 
             document.getElementById("currentUser").innerText = sessionStorage.getItem("username");
             header.classList.add('header_login');
+            window.location.reload()
         }
     }
 
@@ -184,7 +149,7 @@ const backend = () => {
         if (!document.getElementById("loginForm").querySelector('.error')) {
             be_login();
         }
-        
+
     })
 
     document.getElementById("registerForm").addEventListener("submit", (e) => {
@@ -208,8 +173,7 @@ const backend = () => {
         } else {
             loginOrLogoutButton.innerText = "Sign in";
         }
-    }
-    else {
+    } else {
         header.classList.add('header_login');
         if (document.documentElement.lang === 'ru') {
             loginOrLogoutButton.innerText = "Выйти";
